@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNISEX
+  // OTHER
+}
+
+enum Size {
+  S
+  M
+  L
+  XL
+}
+
+enum Color {
+  RED
+  BLUE
+  GREEN
+  YELLOW
+  BLACK
+  WHITE
+  PINK
+  PURPLE
+  BROWN
+  GRAY
+  ORANGE
+}
+
+model Categories {
+  id            Int             @id @default(autoincrement())
+  name          String
+  gender        Gender
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  clothes       Clothes[]
+  subcategories Subcategories[]
+}
+
+model Subcategories {
+  id         Int        @id @default(autoincrement())
+  name       String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  category   Categories @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  clothes    Clothes[]
+}
+
+model Clothes {
+  id            Int            @id @default(autoincrement())
+  name          String
+  // brand         String
+  // brandLogo     String
+  gender        Gender
+  description   String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  category      Categories     @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+  subcategory   Subcategories? @relation(fields: [subcategoryId], references: [id])
+  subcategoryId Int?
+  clothingItem  ClothingItem[]
+}
+
+model ClothingItem {
+  id           Int      @id @default(autoincrement())
+  size         Size
+  color        Color
+  quantity     Int
+  priceInCents Int
+  imageUrl     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  clothes      Clothes  @relation(fields: [clothesId], references: [id])
+  clothesId    Int
+}
