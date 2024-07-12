@@ -41,7 +41,7 @@ model Categories {
   gender        Gender
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
-  clothes       Clothes[]
+  clothes       Clothing[]
   subcategories Subcategories[]
 }
 
@@ -52,34 +52,43 @@ model Subcategories {
   updatedAt  DateTime   @updatedAt
   category   Categories @relation(fields: [categoryId], references: [id])
   categoryId Int
-  clothes    Clothes[]
+  clothes    Clothing[]
 }
 
-model Clothes {
-  id            Int            @id @default(autoincrement())
-  name          String
+model Clothing {
+  id                 Int                  @id @default(autoincrement())
+  name               String
   // brand         String
   // brandLogo     String
-  gender        Gender
-  description   String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  category      Categories     @relation(fields: [categoryId], references: [id])
-  categoryId    Int
-  subcategory   Subcategories? @relation(fields: [subcategoryId], references: [id])
-  subcategoryId Int?
-  clothingItem  ClothingItem[]
+  gender             Gender
+  description        String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  category           Categories           @relation(fields: [categoryId], references: [id])
+  categoryId         Int
+  subcategory        Subcategories?       @relation(fields: [subcategoryId], references: [id])
+  subcategoryId      Int?
+  clothingVariations ClothingVariations[]
 }
 
-model ClothingItem {
-  id           Int      @id @default(autoincrement())
-  size         Size
-  color        Color
-  quantity     Int
-  priceInCents Int
-  imageUrl     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  clothes      Clothes  @relation(fields: [clothesId], references: [id])
-  clothesId    Int
+model ClothingVariations {
+  id        Int         @id @default(autoincrement())
+  color     Color
+  imageUrl  String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  clothes   Clothing    @relation(fields: [clothesId], references: [id])
+  clothesId Int
+  inventory Inventory[]
+}
+
+model Inventory {
+  id                  Int                @id @default(autoincrement())
+  size                Size
+  quantity            Int
+  priceInCents        Int
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  clothingVariation   ClothingVariations @relation(fields: [clothingVariationId], references: [id])
+  clothingVariationId Int
 }

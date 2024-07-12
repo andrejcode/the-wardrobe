@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import categoriesData from './data/categoriesData';
-import clothesData from './data/clothesData';
+import clothesData from './data/clothingData';
 
 const prisma = new PrismaClient();
 
@@ -22,7 +22,7 @@ async function main() {
 
   // Seed clothes
   for (const clothingData of clothesData) {
-    const createdClothing = await prisma.clothes.create({
+    const createdClothing = await prisma.clothing.create({
       data: clothingData,
     });
 

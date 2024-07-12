@@ -30,7 +30,7 @@ CREATE TABLE "Subcategories" (
 );
 
 -- CreateTable
-CREATE TABLE "Clothes" (
+CREATE TABLE "Clothing" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "gender" "Gender" NOT NULL,
@@ -40,32 +40,45 @@ CREATE TABLE "Clothes" (
     "categoryId" INTEGER NOT NULL,
     "subcategoryId" INTEGER,
 
-    CONSTRAINT "Clothes_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Clothing_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "ClothingItem" (
+CREATE TABLE "ClothingVariations" (
     "id" SERIAL NOT NULL,
-    "size" "Size" NOT NULL,
     "color" "Color" NOT NULL,
-    "quantity" INTEGER NOT NULL,
-    "priceInCents" INTEGER NOT NULL,
     "imageUrl" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "clothesId" INTEGER NOT NULL,
 
-    CONSTRAINT "ClothingItem_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ClothingVariations_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Inventory" (
+    "id" SERIAL NOT NULL,
+    "size" "Size" NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "priceInCents" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "clothingVariationId" INTEGER NOT NULL,
+
+    CONSTRAINT "Inventory_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
 ALTER TABLE "Subcategories" ADD CONSTRAINT "Subcategories_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Clothes" ADD CONSTRAINT "Clothes_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Clothing" ADD CONSTRAINT "Clothing_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Clothes" ADD CONSTRAINT "Clothes_subcategoryId_fkey" FOREIGN KEY ("subcategoryId") REFERENCES "Subcategories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Clothing" ADD CONSTRAINT "Clothing_subcategoryId_fkey" FOREIGN KEY ("subcategoryId") REFERENCES "Subcategories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ClothingItem" ADD CONSTRAINT "ClothingItem_clothesId_fkey" FOREIGN KEY ("clothesId") REFERENCES "Clothes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ClothingVariations" ADD CONSTRAINT "ClothingVariations_clothesId_fkey" FOREIGN KEY ("clothesId") REFERENCES "Clothing"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_clothingVariationId_fkey" FOREIGN KEY ("clothingVariationId") REFERENCES "ClothingVariations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
