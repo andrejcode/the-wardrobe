@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { inter } from '@/app/fonts';
+import { openSans } from '@/app/fonts';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${openSans.className} antialiased`}>{children}</body>
     </html>
   );
 }

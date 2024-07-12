@@ -1,35 +1,15 @@
-import prisma from '@/lib/prisma';
-import { Gender } from '@prisma/client';
+import { Hero, CategoriesSection } from '@/components/home/';
+import { Suspense } from 'react';
 
-export default async function Page() {
-  const categories = await prisma.categories.findMany({
-    include: {
-      subcategories: true,
-    },
-  });
-
-  const femaleCategories = categories.filter(
-    (category) => category.gender !== Gender.MALE
-  );
-  const maleCategories = categories.filter(
-    (category) => category.gender !== Gender.FEMALE
-  );
-
+export default function HomePage() {
   return (
-    <main>
-      <h2>Women&apos;s categories</h2>
-      <ul>
-        {femaleCategories.map((category) => (
-          <li key={category.id}>Women&apos;s {category.name}</li>
-        ))}
-      </ul>
-
-      <h2>Men&apos;s categories</h2>
-      <ul>
-        {maleCategories.map((category) => (
-          <li key={category.id}>Men&apos;s {category.name}</li>
-        ))}
-      </ul>
-    </main>
+    <>
+      <Hero />
+      <Suspense
+        fallback={<p className="my-12 text-center">Loading categories...</p>}
+      >
+        <CategoriesSection />
+      </Suspense>
+    </>
   );
 }
