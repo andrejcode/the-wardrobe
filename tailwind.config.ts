@@ -7,7 +7,12 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        navyBlue: '#001F3F',
+        lightGray: '#DDDDDD',
+      },
+    },
   },
   plugins: [require('@tailwindcss/forms')],
 };
