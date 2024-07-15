@@ -3,9 +3,8 @@
 import useMobileModal from '@/hooks/useMobileModal';
 import MobileModal from '@/components/mobile-modal';
 import Categories from '@/components/clothing/categories';
-import Button from '@/components/button';
-import { IoCaretDownOutline } from 'react-icons/io5';
 import { CategoriesWithSubcategories } from '@/lib/definitions';
+import DropdownButton from '../dropdown-button';
 
 export default function MobileCategories({
   categories,
@@ -16,9 +15,9 @@ export default function MobileCategories({
 
   return (
     <>
-      <Button onClick={openModal} Icon={IoCaretDownOutline} fullWidth>
+      <DropdownButton isOpen={isOpen} onClick={openModal} fullWidth>
         Categories
-      </Button>
+      </DropdownButton>
 
       {isOpen && (
         <MobileModal closeModal={closeModal}>
