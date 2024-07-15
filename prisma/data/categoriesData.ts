@@ -25,12 +25,12 @@ const categoriesData: Prisma.CategoriesCreateInput[] = [
   { name: 'Skirts', gender: Gender.FEMALE, subcategories: { create: [] } },
   { name: 'Shirts', gender: Gender.UNISEX, subcategories: { create: [] } },
   {
-    name: 'Sweatshirts & Hoodies',
+    name: 'Tracksuits And Joggers',
     gender: Gender.UNISEX,
     subcategories: { create: [] },
   },
   {
-    name: 'Tracksuits & Joggers',
+    name: 'Sweatshirts And Hoodies',
     gender: Gender.UNISEX,
     subcategories: { create: [] },
   },
