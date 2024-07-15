@@ -17,8 +17,8 @@ export default async function CategoriesSection() {
 
   return (
     <section>
-      <HomeCategories categories={femaleCategories} title="Women's" />
-      <HomeCategories categories={maleCategories} title="Men's" />
+      <HomeCategories categories={femaleCategories} categoryFor="women" />
+      <HomeCategories categories={maleCategories} categoryFor="men" />
     </section>
   );
 }
