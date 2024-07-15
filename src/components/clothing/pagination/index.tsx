@@ -1,15 +1,26 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { calculatePages } from '@/lib/utils';
 import PaginationArrow from './pagination-arrow';
 
 export default function Pagination({ itemCount }: { itemCount: number }) {
+  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
   const totalPages = calculatePages(itemCount);
+
+  // Redirect to the first page if the current page is greater than the total pages
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      const search = new URLSearchParams(searchParams);
+      search.set('page', '1');
+      router.push(`${pathname}?${search.toString()}`);
+    }
+  }, [currentPage, pathname, router, searchParams, totalPages]);
 
   function createPageURL(page: number | string) {
     const search = new URLSearchParams(searchParams);

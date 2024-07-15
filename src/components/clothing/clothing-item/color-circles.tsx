@@ -1,4 +1,5 @@
 import { ClothingVariations } from '@prisma/client';
+import clsx from 'clsx';
 
 export default function ColorCircles({
   variations,
@@ -17,9 +18,7 @@ export default function ColorCircles({
             changeVariationIndex(index);
           }}
           className="h-6 w-6 cursor-pointer rounded-full border border-black"
-          style={{
-            backgroundColor: variation.color,
-          }}
+          style={{ backgroundColor: variation.color }}
         ></div>
       ))}
     </div>

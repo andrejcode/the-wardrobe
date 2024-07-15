@@ -21,7 +21,7 @@ export default function ClothingItem({
 
   return (
     <Link href={`/shop/clothing-item/${clothingItem.id}`}>
-      <div className="m-4 flex h-[500px] max-w-80 cursor-pointer flex-col rounded-lg bg-white p-4 shadow-lg">
+      <div className="mb-4 flex h-[500px] w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-lg md:m-4 md:max-w-80">
         <div className="relative h-80 w-80 self-center">
           <Image
             src={clothingItem.clothingVariations[variationIndex].imageUrl}
@@ -30,7 +30,7 @@ export default function ClothingItem({
             priority={true}
             sizes="100%"
             quality={50}
-            // style={{ objectFit: 'contain' }}
+            style={{ objectFit: 'contain' }}
           />
         </div>
 

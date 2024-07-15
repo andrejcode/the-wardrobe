@@ -9,14 +9,23 @@ export default async function SectionPage({
   searchParams,
 }: {
   params: { section: string };
-  searchParams?: { page?: string };
+  searchParams?: {
+    page?: string;
+    color?: string | string[];
+    size?: string | string[];
+  };
 }) {
   const section = params.section;
-  const page = searchParams?.page ? parseInt(searchParams.page) : 1;
 
   if (!SECTIONS.includes(section)) {
     notFound();
   }
+
+  const page = searchParams?.page ? parseInt(searchParams.page) : 1;
+  const colors: string | string[] = searchParams?.color
+    ? searchParams.color
+    : [];
+  const sizes: string | string[] = searchParams?.size ? searchParams.size : [];
 
   return (
     <Suspense fallback={<ClothingSkeleton />}>
@@ -24,6 +33,8 @@ export default async function SectionPage({
         title={`Clothing for ${section}`}
         section={section}
         page={page}
+        colors={colors}
+        sizes={sizes}
       />
     </Suspense>
   );

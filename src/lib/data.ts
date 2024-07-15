@@ -4,6 +4,7 @@ import {
   CategoriesWithSubcategories,
   ClothingWithVariationsAndInventory,
 } from './definitions';
+import { getColorsAndSizesArrayFromParams } from './utils';
 
 export async function fetchCategories(): Promise<
   CategoriesWithSubcategories[]
@@ -23,17 +24,50 @@ export async function fetchCategories(): Promise<
  * @param gender - The gender of the clothing items to fetch.
  * @param skip - The number of items to skip.
  * @param take - The number of items to take.
+ * @param category - The category of the clothing items to fetch.
+ * @param subcategory - The subcategory of the clothing items to fetch.
+ * @param colors - The colors of the clothing items to fetch.
+ * @param sizes - The sizes of the clothing items to fetch.
  * @returns A promise that resolves to an array of clothing items with their variations and inventory.
  */
 export async function fetchClothing(
   gender?: Gender,
   skip?: number,
-  take?: number
+  take?: number,
+  category?: string,
+  subcategory?: string,
+  colors?: string[] | string,
+  sizes?: string[] | string
 ): Promise<ClothingWithVariationsAndInventory[]> {
-  const where = gender ? { gender: gender } : {};
+  const { colorsArray, sizesArray } = getColorsAndSizesArrayFromParams(
+    colors,
+    sizes
+  );
 
   const clothing = await prisma.clothing.findMany({
-    where,
+    where: {
+      gender: gender,
+      category: {
+        name: category,
+      },
+      subcategory: {
+        name: subcategory,
+      },
+      clothingVariations: {
+        some: {
+          color: {
+            in: colorsArray,
+          },
+          inventory: {
+            some: {
+              size: {
+                in: sizesArray,
+              },
+            },
+          },
+        },
+      },
+    },
     skip,
     take,
     include: {
@@ -48,9 +82,42 @@ export async function fetchClothing(
   return clothing;
 }
 
-export async function fetchClothingCount(gender?: Gender): Promise<number> {
-  const where = gender ? { gender: gender } : {};
+export async function fetchClothingCount(
+  gender?: Gender,
+  category?: string,
+  subcategory?: string,
+  colors?: string[] | string,
+  sizes?: string[] | string
+): Promise<number> {
+  const { colorsArray, sizesArray } = getColorsAndSizesArrayFromParams(
+    colors,
+    sizes
+  );
 
-  const count = await prisma.clothing.count({ where });
+  const count = await prisma.clothing.count({
+    where: {
+      gender: gender,
+      category: {
+        name: category,
+      },
+      subcategory: {
+        name: subcategory,
+      },
+      clothingVariations: {
+        some: {
+          color: {
+            in: colorsArray,
+          },
+          inventory: {
+            some: {
+              size: {
+                in: sizesArray,
+              },
+            },
+          },
+        },
+      },
+    },
+  });
   return count;
 }
