@@ -5,7 +5,7 @@ export default function Logo() {
   return (
     <Link href="/">
       <div
-        className={`${playfairDisplay.className} py-4 text-lg font-bold md:text-2xl`}
+        className={`${playfairDisplay.className} whitespace-nowrap py-4 text-xl font-bold md:text-2xl`}
       >
         The Wardrobe
       </div>
