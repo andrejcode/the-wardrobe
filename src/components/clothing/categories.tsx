@@ -11,7 +11,7 @@ export default function Categories({
 }: {
   categories: CategoriesWithSubcategories[];
 }) {
-  const params = useParams<{ section: string; category: string }>();
+  const params = useParams<{ section: string }>();
 
   const filteredCategories = categories.filter((category) => {
     switch (params.section) {
@@ -35,7 +35,7 @@ export default function Categories({
             className="mt-2 cursor-pointer list-none font-bold md:text-lg"
           >
             <Link
-              href={`/shop/${params.section}/${getParamFromCategoryName(category.name)}`}
+              href={`/shop/${params.section ?? 'all'}/${getParamFromCategoryName(category.name)}`}
             >
               {category.name}
             </Link>
@@ -48,7 +48,7 @@ export default function Categories({
                     key={subcategory.id}
                   >
                     <Link
-                      href={`/shop/${params.section}/${params.category}/${getParamFromCategoryName(subcategory.name)}`}
+                      href={`/shop/${params.section ?? 'all'}/${getParamFromCategoryName(category.name)}/${getParamFromCategoryName(subcategory.name)}`}
                     >
                       {subcategory.name}
                     </Link>
