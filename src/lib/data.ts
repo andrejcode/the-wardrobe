@@ -28,6 +28,7 @@ export async function fetchCategories(): Promise<
  * @param subcategory - The subcategory of the clothing items to fetch.
  * @param colors - The colors of the clothing items to fetch.
  * @param sizes - The sizes of the clothing items to fetch.
+ * @param name - The name of the clothing items to fetch.
  * @returns A promise that resolves to an array of clothing items with their variations and inventory.
  */
 export async function fetchClothing(
@@ -37,7 +38,8 @@ export async function fetchClothing(
   category?: string,
   subcategory?: string,
   colors?: string[] | string,
-  sizes?: string[] | string
+  sizes?: string[] | string,
+  name?: string
 ): Promise<ClothingWithVariationsAndInventory[]> {
   const { colorsArray, sizesArray } = getColorsAndSizesArrayFromParams(
     colors,
@@ -46,6 +48,10 @@ export async function fetchClothing(
 
   const clothing = await prisma.clothing.findMany({
     where: {
+      name: {
+        contains: name,
+        mode: 'insensitive',
+      },
       gender: gender,
       category: {
         name: category,
@@ -87,7 +93,8 @@ export async function fetchClothingCount(
   category?: string,
   subcategory?: string,
   colors?: string[] | string,
-  sizes?: string[] | string
+  sizes?: string[] | string,
+  name?: string
 ): Promise<number> {
   const { colorsArray, sizesArray } = getColorsAndSizesArrayFromParams(
     colors,
@@ -96,6 +103,7 @@ export async function fetchClothingCount(
 
   const count = await prisma.clothing.count({
     where: {
+      name: name,
       gender: gender,
       category: {
         name: category,

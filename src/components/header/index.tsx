@@ -20,19 +20,16 @@ export default function Header() {
         </div>
 
         <div className="flex items-center md:hidden">
-          <div className="mr-4">
-            <IoMenuOutline
-              size={24}
-              className="cursor-pointer"
-              onClick={openModal}
-            />
-          </div>
+          <IoMenuOutline
+            size={24}
+            className="mr-4 cursor-pointer"
+            onClick={openModal}
+          />
           <Logo />
         </div>
 
-        {/* TODO: search */}
-        <div className="hidden md:block">
-          <Search />
+        <div className="mx-4 hidden md:block md:flex-grow">
+          <Search placeholder="Search for items" />
         </div>
 
         <Icons />

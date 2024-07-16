@@ -8,12 +8,13 @@ import { CLOTHING_ITEMS_PER_PAGE } from '@/lib/constants';
 
 interface ClothingProps {
   title: string;
-  section: string;
+  section?: string;
   category?: string;
   subcategory?: string;
   page: number;
   colors?: string[] | string;
   sizes?: string[] | string;
+  clothingItemName?: string;
 }
 
 export default async function Clothing({
@@ -24,8 +25,9 @@ export default async function Clothing({
   page,
   colors,
   sizes,
+  clothingItemName,
 }: ClothingProps) {
-  const gender = getGenderForSection(section);
+  const gender = section ? getGenderForSection(section!) : undefined;
 
   const clothing = await fetchClothing(
     gender,
@@ -34,10 +36,18 @@ export default async function Clothing({
     category,
     subcategory,
     colors,
-    sizes
+    sizes,
+    clothingItemName
   );
 
-  const clothingCount = await fetchClothingCount(gender, category, subcategory);
+  const clothingCount = await fetchClothingCount(
+    gender,
+    category,
+    subcategory,
+    colors,
+    sizes,
+    clothingItemName
+  );
 
   return (
     <div className="flex flex-col">
@@ -51,7 +61,7 @@ export default async function Clothing({
 
       <div className="m-4 flex min-h-screen flex-col flex-wrap items-center md:m-0 md:flex-row md:items-start">
         {clothing.length === 0 ? (
-          <div className="m-4 text-lg">There are no clothing yet.</div>
+          <div className="m-4 text-lg">There are no clothing.</div>
         ) : (
           clothing.map((clothingItem) => (
             <ClothingItem key={clothingItem.id} clothingItem={clothingItem} />

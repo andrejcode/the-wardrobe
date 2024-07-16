@@ -6,7 +6,7 @@ export default function MobileMenu({ closeMenu }: { closeMenu: () => void }) {
   return (
     <MobileModal closeModal={closeMenu}>
       <>
-        <Search />
+        <Search placeholder="Search for items" />
         <NavLinks />
       </>
     </MobileModal>
