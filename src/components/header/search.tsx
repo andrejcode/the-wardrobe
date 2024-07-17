@@ -29,7 +29,6 @@ export default function Search({ placeholder }: { placeholder: string }) {
       <input
         className="block w-full rounded-md py-2 pl-10 text-sm text-black placeholder:text-gray-500"
         placeholder={placeholder}
-        value={term}
         onChange={(event) => setTerm(event.target.value)}
         defaultValue={searchParams.get('q')?.toString()}
         onKeyDown={handleSearch}
