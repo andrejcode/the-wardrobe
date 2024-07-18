@@ -20,7 +20,7 @@ export default function NavLinks() {
           key={link.name}
           href={link.href}
           className={clsx(
-            'px-3 py-4 text-lg hover:bg-lightGray hover:text-black md:h-full md:border-l md:border-lightGray',
+            'px-3 py-3 text-lg hover:bg-lightGray hover:text-black md:h-full md:border-l md:border-lightGray md:py-4',
             {
               // underline when formatted is not string.
               // prettier-ignore
