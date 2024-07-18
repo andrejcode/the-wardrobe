@@ -7,6 +7,7 @@ interface ButtonProps {
   fullWidth?: boolean;
   rounded?: boolean;
   Icon?: React.ElementType;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export default function Button({
@@ -16,9 +17,11 @@ export default function Button({
   fullWidth,
   rounded = false,
   Icon,
+  type = 'button',
 }: ButtonProps) {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={clsx(
         'cursor-pointer border px-4 py-2 transition-colors duration-300 md:text-lg',
@@ -35,7 +38,7 @@ export default function Button({
       <div className="flex items-center justify-center">
         {children}
         {Icon && (
-          <div className="mx-1">
+          <div className="ml-2">
             <Icon />
           </div>
         )}
