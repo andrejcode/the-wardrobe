@@ -22,17 +22,16 @@ export default function HomeCategories({
       </h2>
       <ul className="mx-5 flex list-none flex-col flex-wrap md:flex-row md:justify-center">
         {categories.map((category) => (
-          <Link
+          <li
             key={category.id}
-            href={`shop/${categoryFor}/${getParamFromCategoryName(category.name)}`}
+            className="py-2 text-center hover:text-gray-600 md:p-4 md:text-lg"
           >
-            <li
-              className="py-2 text-center hover:text-gray-600 md:p-4 md:text-lg"
-              key={category.id}
+            <Link
+              href={`shop/${categoryFor}/${getParamFromCategoryName(category.name)}`}
             >
               {title} {category.name}
-            </li>
-          </Link>
+            </Link>
+          </li>
         ))}
       </ul>
     </section>
