@@ -8,7 +8,7 @@ export default function MobileModal({
   closeModal: () => void;
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex h-screen flex-col bg-white md:hidden">
+    <div className="fixed inset-0 z-50 flex h-screen flex-col bg-white text-black md:hidden">
       <IoCloseOutline
         size={24}
         onClick={closeModal}
