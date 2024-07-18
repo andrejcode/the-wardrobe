@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Clothing from '@/components/clothing';
 import ClothingSkeleton from '@/components/clothing/clothing-skeleton';
 import { SECTIONS } from '@/lib/constants';
+import Filters from '@/components/clothing/filters';
 
 export default async function SectionPage({
   params,
@@ -28,14 +29,17 @@ export default async function SectionPage({
   const sizes: string | string[] = searchParams?.size ? searchParams.size : [];
 
   return (
-    <Suspense fallback={<ClothingSkeleton />}>
-      <Clothing
-        title={`Clothing for ${section}`}
-        section={section}
-        page={page}
-        colors={colors}
-        sizes={sizes}
-      />
-    </Suspense>
+    <section className="flex flex-col">
+      <Filters />
+      <Suspense fallback={<ClothingSkeleton />}>
+        <Clothing
+          title={`Clothing for ${section}`}
+          section={section}
+          page={page}
+          colors={colors}
+          sizes={sizes}
+        />
+      </Suspense>
+    </section>
   );
 }

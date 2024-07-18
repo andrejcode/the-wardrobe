@@ -1,5 +1,4 @@
 import Pagination from './pagination';
-import Filters from './filters';
 import ClothingItem from './clothing-item';
 import { playfairDisplay } from '@/app/fonts';
 import { fetchClothing, fetchClothingCount } from '@/lib/data';
@@ -51,8 +50,6 @@ export default async function Clothing({
 
   return (
     <div className="flex flex-col">
-      <Filters />
-
       <h1
         className={`${playfairDisplay.className} mx-4 mt-4 text-center text-xl font-bold md:text-left md:text-3xl`}
       >

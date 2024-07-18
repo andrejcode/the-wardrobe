@@ -1,5 +1,6 @@
 import Clothing from '@/components/clothing';
 import ClothingSkeleton from '@/components/clothing/clothing-skeleton';
+import Filters from '@/components/clothing/filters';
 import { SECTIONS } from '@/lib/constants';
 import { getCategoryNameFromParam } from '@/lib/utils';
 import { notFound } from 'next/navigation';
@@ -30,15 +31,18 @@ export default function CategoryPage({
   const sizes: string | string[] = searchParams?.size ? searchParams.size : [];
 
   return (
-    <Suspense fallback={<ClothingSkeleton />}>
-      <Clothing
-        title={`${categoryName} for ${section}`}
-        section={section}
-        category={categoryName}
-        page={page}
-        colors={colors}
-        sizes={sizes}
-      />
-    </Suspense>
+    <section className="flex flex-col">
+      <Filters />
+      <Suspense fallback={<ClothingSkeleton />}>
+        <Clothing
+          title={`${categoryName} for ${section}`}
+          section={section}
+          category={categoryName}
+          page={page}
+          colors={colors}
+          sizes={sizes}
+        />
+      </Suspense>
+    </section>
   );
 }
