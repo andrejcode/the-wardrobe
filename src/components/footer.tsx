@@ -8,7 +8,7 @@ export default function Footer() {
     <footer>
       <hr className="border-lightGray" />
 
-      <div className="mx-auto my-6 flex w-1/2 flex-col items-start md:mx-4 md:w-full md:flex-row">
+      <div className="mx-auto my-6 flex w-1/2 flex-col items-start md:mx-4 md:flex-row">
         <Logo />
         <ul className="md:ml-6 md:py-4">
           <li>
