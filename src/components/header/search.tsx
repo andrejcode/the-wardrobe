@@ -27,6 +27,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
         Search
       </label>
       <input
+        id="search"
         className="block w-full rounded-md py-2 pl-10 text-sm text-black placeholder:text-gray-500"
         placeholder={placeholder}
         onChange={(event) => setTerm(event.target.value)}
