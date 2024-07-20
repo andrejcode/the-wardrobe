@@ -1,22 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Sizes from './sizes';
 import ColorCircles from './color-circles';
 import SmallestPrice from './smallest-price';
 import { ClothingWithVariationsAndInventory } from '@/lib/definitions';
+import { Color } from '@prisma/client';
 
 export default function ClothingItem({
   clothingItem,
 }: {
   clothingItem: ClothingWithVariationsAndInventory;
 }) {
-  const [variationIndex, setVariationIndex] = useState(0);
+  const [activeColor, setActiveColor] = useState<Color>(
+    clothingItem.clothingVariations[0].color
+  );
+  const [imageUrl, setImageUrl] = useState<string>(
+    clothingItem.clothingVariations[0].imageUrl
+  );
 
-  function changeVariationIndex(index: number) {
-    setVariationIndex(index);
+  useEffect(() => {
+    setImageUrl(
+      clothingItem.clothingVariations.find(
+        (variation) => variation.color === activeColor
+      )?.imageUrl ?? '/clothing/placeholder-image.jpg'
+    );
+  }, [activeColor, clothingItem.clothingVariations]);
+
+  function changeColor(color: Color) {
+    setActiveColor(color);
   }
 
   return (
@@ -24,7 +38,7 @@ export default function ClothingItem({
       <div className="mb-4 flex h-[500px] w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-lg md:m-4 md:max-w-80">
         <div className="relative h-80 w-80 self-center">
           <Image
-            src={clothingItem.clothingVariations[variationIndex].imageUrl}
+            src={imageUrl}
             alt={clothingItem.name}
             fill={true}
             priority={true}
@@ -36,7 +50,8 @@ export default function ClothingItem({
 
         <h2 className="mt-4 font-bold md:text-lg">{clothingItem.name}</h2>
         <ColorCircles
-          changeVariationIndex={changeVariationIndex}
+          activeColor={activeColor}
+          changeColor={changeColor}
           variations={clothingItem.clothingVariations}
         />
         <Sizes clothingItem={clothingItem} />
