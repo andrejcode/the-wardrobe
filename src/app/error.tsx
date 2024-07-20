@@ -11,7 +11,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen flex-col items-center justify-center">
       <h2 className="mb-2 text-lg">Something went wrong!</h2>
       <Link href="/">
         <Button rounded>Return Home</Button>

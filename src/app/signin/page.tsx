@@ -13,7 +13,7 @@ export default async function SignInPage() {
   }
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center rounded-lg p-24 shadow-lg">
         <Logo />
         <form action={signInWithGoogle} className="mt-12">
