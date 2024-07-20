@@ -10,7 +10,7 @@ export default function Hero() {
         src="/hero-image.jpg"
         alt="Clothes hanging on a rack"
         fill={true}
-        style={{ objectFit: 'cover' }}
+        className="object-cover"
         quality={50}
         priority={true}
       />
