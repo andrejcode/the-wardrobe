@@ -31,7 +31,7 @@ export default async function ClothingDetails({
   }
 
   const item = await fetchClothingItemById(id, color, size);
-  const isInWishlist = await isItemInWishlist(id, user!.id);
+  const isInWishlist = user ? await isItemInWishlist(id, user.id) : false;
 
   if (!item) {
     notFound();
@@ -101,7 +101,7 @@ export default async function ClothingDetails({
   const quantity = calculateQuantity();
 
   return (
-    <section className="mx-4 mt-8 flex flex-col items-center justify-center md:mx-[10%] md:mt-16 md:flex-row">
+    <section className="mx-4 mt-4 flex flex-col items-center justify-center md:mx-[10%] md:mt-16 md:flex-row">
       <div className="relative mb-8 h-96 w-96 md:mb-0 md:flex-1">
         <Image
           src={imageUrl}
