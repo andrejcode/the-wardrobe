@@ -30,7 +30,7 @@ export default function ClothingItem({
             priority={true}
             sizes="100%"
             quality={50}
-            style={{ objectFit: 'contain' }}
+            className="object-contain"
           />
         </div>
 

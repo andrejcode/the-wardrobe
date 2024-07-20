@@ -14,7 +14,8 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.PINK,
-          imageUrl: '/clothing/zara-floral-summer-dress/zara-dress-pink.jpg',
+          imageUrl:
+            '/clothing/women/zara-floral-summer-dress/zara-dress-pink.jpg',
           inventory: {
             create: [
               {
@@ -37,7 +38,8 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.ORANGE,
-          imageUrl: '/clothing/zara-floral-summer-dress/zara-dress-orange.jpg',
+          imageUrl:
+            '/clothing/women/zara-floral-summer-dress/zara-dress-orange.jpg',
           inventory: {
             create: [
               {
@@ -62,6 +64,112 @@ const clothesData: Prisma.ClothingCreateInput[] = [
     },
   },
   {
+    name: 'H&M Wide-Cut Pull-On Pants',
+    gender: Gender.FEMALE,
+    description:
+      'These wide-cut pull-on pants from H&M are designed for comfort and style. Made with a soft and flowy fabric, they feature an elastic waistband and side pockets for added convenience. The wide-leg design offers a relaxed fit and a trendy look.',
+    category: {
+      connect: { id: 3 },
+    },
+    clothingVariations: {
+      create: [
+        {
+          color: Color.BLACK,
+          imageUrl:
+            '/clothing/women/hm-wide-cut-pull-on-pants/hm-wide-cut-pants-black.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 10, priceInCents: 3999 },
+              { size: Size.M, quantity: 12, priceInCents: 3999 },
+              { size: Size.L, quantity: 12, priceInCents: 3999 },
+            ],
+          },
+        },
+        {
+          color: Color.GRAY,
+          imageUrl:
+            '/clothing/women/hm-wide-cut-pull-on-pants/hm-wide-cut-pants-gray.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 10, priceInCents: 3999 },
+              { size: Size.M, quantity: 12, priceInCents: 3999 },
+              { size: Size.L, quantity: 12, priceInCents: 3999 },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  {
+    name: 'ADIDAS Essentials Slim 3-Stripes Tee',
+    gender: Gender.FEMALE,
+    description:
+      'This Adidas tee features the iconic 3-stripes design for a sporty and stylish look. Made with soft and stretchy fabric, it offers comfort and flexibility for workouts or casual wear. The slim fit and crew neck design provide a flattering silhouette.',
+    category: {
+      connect: { id: 1 },
+    },
+    subcategory: {
+      connect: { id: 1 },
+    },
+    clothingVariations: {
+      create: [
+        {
+          color: Color.BLACK,
+          imageUrl:
+            '/clothing/women/adidas-essentials-slim-tee/adidas-black.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 10, priceInCents: 2499 },
+              { size: Size.M, quantity: 12, priceInCents: 2499 },
+              { size: Size.L, quantity: 12, priceInCents: 2499 },
+            ],
+          },
+        },
+        {
+          color: Color.PINK,
+          imageUrl:
+            '/clothing/women/adidas-essentials-slim-tee/adidas-pink.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 10, priceInCents: 2499 },
+              { size: Size.M, quantity: 12, priceInCents: 2499 },
+              { size: Size.L, quantity: 12, priceInCents: 2499 },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  {
+    name: 'ADIDAS Adicolor Classics Long Sleeve Tee',
+    gender: Gender.FEMALE,
+    description:
+      'This Adidas long sleeve tee features a classic design with the iconic trefoil logo. Made with soft and comfortable fabric, it offers a relaxed fit and a casual look. The ribbed crew neck and cuffs provide a snug and secure feel.',
+    category: {
+      connect: { id: 1 },
+    },
+    subcategory: {
+      connect: { id: 2 },
+    },
+    clothingVariations: {
+      create: [
+        {
+          color: Color.BLACK,
+          imageUrl:
+            '/clothing/women/adidas-adicolor-long-sleeve-tee/adidas-long-sleeve.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 10, priceInCents: 2999 },
+              { size: Size.M, quantity: 0, priceInCents: 2999 },
+              { size: Size.L, quantity: 12, priceInCents: 2999 },
+              { size: Size.XL, quantity: 12, priceInCents: 3999 },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  {
     name: 'H&M Low Waist Denim Skirt',
     gender: Gender.FEMALE,
     description:
@@ -73,7 +181,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLUE,
-          imageUrl: '/clothing/hm-low-waist-skirt/hm-skirt-blue.jpeg',
+          imageUrl: '/clothing/women/hm-low-waist-skirt/hm-skirt-blue.jpeg',
           inventory: {
             create: [
               { size: Size.S, quantity: 12, priceInCents: 2999 },
@@ -84,47 +192,12 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/hm-low-waist-skirt/hm-skirt-black.jpeg',
+          imageUrl: '/clothing/women/hm-low-waist-skirt/hm-skirt-black.jpeg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 2999 },
               { size: Size.M, quantity: 12, priceInCents: 2999 },
               { size: Size.L, quantity: 12, priceInCents: 2999 },
-            ],
-          },
-        },
-      ],
-    },
-  },
-  {
-    name: "LEVI'S Classic Jeans",
-    gender: Gender.FEMALE,
-    description:
-      "These classic Levi's jeans are made with durable denim and feature a timeless design. They offer a comfortable fit with a slight stretch and are perfect for everyday wear. The jeans have a button and zip closure, five-pocket styling, and a straight leg cut.",
-    category: {
-      connect: { id: 2 },
-    },
-    clothingVariations: {
-      create: [
-        {
-          color: Color.BLUE,
-          imageUrl: '/clothing/levis-classic-jeans/levis-jeans-blue.jpg',
-          inventory: {
-            create: [
-              { size: Size.S, quantity: 20, priceInCents: 6999 },
-              { size: Size.M, quantity: 25, priceInCents: 6999 },
-              { size: Size.L, quantity: 25, priceInCents: 6999 },
-            ],
-          },
-        },
-        {
-          color: Color.BLACK,
-          imageUrl: '/clothing/levis-classic-jeans/levis-jeans-black.jpg',
-          inventory: {
-            create: [
-              { size: Size.S, quantity: 15, priceInCents: 6999 },
-              { size: Size.M, quantity: 20, priceInCents: 6999 },
-              { size: Size.L, quantity: 20, priceInCents: 6999 },
             ],
           },
         },
@@ -143,7 +216,8 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLUE,
-          imageUrl: '/clothing/hm-high-waist-skinny-jeans/hm-jeans-blue.jpeg',
+          imageUrl:
+            '/clothing/women/hm-high-waist-skinny-jeans/hm-jeans-blue.jpeg',
           inventory: {
             create: [
               { size: Size.S, quantity: 20, priceInCents: 3999 },
@@ -154,7 +228,8 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/hm-high-waist-skinny-jeans/hm-jeans-black.jpeg',
+          imageUrl:
+            '/clothing/women/hm-high-waist-skinny-jeans/hm-jeans-black.jpeg',
           inventory: {
             create: [
               { size: Size.S, quantity: 18, priceInCents: 3999 },
@@ -178,7 +253,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.WHITE,
-          imageUrl: '/clothing/gap-cotton-shirt/gap-shirt-white.jpg',
+          imageUrl: '/clothing/women/gap-cotton-shirt/gap-shirt-white.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 15, priceInCents: 2499 },
@@ -189,7 +264,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/gap-cotton-shirt/gap-shirt-black.jpg',
+          imageUrl: '/clothing/women/gap-cotton-shirt/gap-shirt-black.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 12, priceInCents: 2499 },
@@ -213,7 +288,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/protest-day-dress/day-dress-black.jpg',
+          imageUrl: '/clothing/women/protest-day-dress/day-dress-black.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 2999 },
@@ -224,7 +299,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.GREEN,
-          imageUrl: '/clothing/protest-day-dress/day-dress-green.jpg',
+          imageUrl: '/clothing/women/protest-day-dress/day-dress-green.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 2999 },
@@ -235,7 +310,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.PINK,
-          imageUrl: '/clothing/protest-day-dress/day-dress-pink.jpg',
+          imageUrl: '/clothing/women/protest-day-dress/day-dress-pink.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 2999 },
@@ -259,7 +334,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/mango-jacket/mango-jacket-black.jpg',
+          imageUrl: '/clothing/women/mango-jacket/mango-jacket-black.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 5999 },
@@ -288,7 +363,8 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/nike-regular-fit-tshirt/nike-tshirt-black.jpg',
+          imageUrl:
+            '/clothing/men/nike-regular-fit-tshirt/nike-tshirt-black.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 1999 },
@@ -299,7 +375,8 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.WHITE,
-          imageUrl: '/clothing/nike-regular-fit-tshirt/nike-tshirt-white.jpg',
+          imageUrl:
+            '/clothing/men/nike-regular-fit-tshirt/nike-tshirt-white.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 13, priceInCents: 1999 },
@@ -310,12 +387,47 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.RED,
-          imageUrl: '/clothing/nike-regular-fit-tshirt/nike-tshirt-red.jpg',
+          imageUrl: '/clothing/men/nike-regular-fit-tshirt/nike-tshirt-red.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 13, priceInCents: 1999 },
               { size: Size.M, quantity: 32, priceInCents: 1999 },
               { size: Size.L, quantity: 26, priceInCents: 2199 },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  {
+    name: "LEVI'S Classic Jeans",
+    gender: Gender.MALE,
+    description:
+      "These classic Levi's jeans are made with durable denim and feature a timeless design. They offer a comfortable fit with a slight stretch and are perfect for everyday wear. The jeans have a button and zip closure, five-pocket styling, and a straight leg cut.",
+    category: {
+      connect: { id: 2 },
+    },
+    clothingVariations: {
+      create: [
+        {
+          color: Color.BLUE,
+          imageUrl: '/clothing/men/levis-classic-jeans/levis-jeans-blue.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 20, priceInCents: 6999 },
+              { size: Size.M, quantity: 25, priceInCents: 6999 },
+              { size: Size.L, quantity: 25, priceInCents: 6999 },
+            ],
+          },
+        },
+        {
+          color: Color.BLACK,
+          imageUrl: '/clothing/men/levis-classic-jeans/levis-jeans-black.jpg',
+          inventory: {
+            create: [
+              { size: Size.S, quantity: 15, priceInCents: 6999 },
+              { size: Size.M, quantity: 20, priceInCents: 6999 },
+              { size: Size.L, quantity: 20, priceInCents: 6999 },
             ],
           },
         },
@@ -334,7 +446,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/adidas-joggers/adidas-joggers-black.jpg',
+          imageUrl: '/clothing/men/adidas-joggers/adidas-joggers-black.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 8, priceInCents: 3999 },
@@ -346,7 +458,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.BLUE,
-          imageUrl: '/clothing/adidas-joggers/adidas-joggers-blue.jpg',
+          imageUrl: '/clothing/men/adidas-joggers/adidas-joggers-blue.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 3999 },
@@ -371,7 +483,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/puma-hoodie/puma-hoodie-black.jpg',
+          imageUrl: '/clothing/men/puma-hoodie/puma-hoodie-black.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 4999 },
@@ -383,7 +495,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.GRAY,
-          imageUrl: '/clothing/puma-hoodie/puma-hoodie-gray.jpg',
+          imageUrl: '/clothing/men/puma-hoodie/puma-hoodie-gray.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 12, priceInCents: 4999 },
@@ -395,7 +507,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
         },
         {
           color: Color.WHITE,
-          imageUrl: '/clothing/puma-hoodie/puma-hoodie-white.jpg',
+          imageUrl: '/clothing/men/puma-hoodie/puma-hoodie-white.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 4999 },
@@ -420,7 +532,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.GRAY,
-          imageUrl: '/clothing/uniqlo-shirt/uniqlo-shirt-gray.jpg',
+          imageUrl: '/clothing/men/uniqlo-shirt/uniqlo-shirt-gray.jpg',
           inventory: {
             create: [
               { size: Size.S, quantity: 10, priceInCents: 2999 },
@@ -444,7 +556,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/tnf-jacket/winter-jacket-black.jpg',
+          imageUrl: '/clothing/men/tnf-jacket/winter-jacket-black.jpg',
           inventory: {
             create: [
               { size: Size.M, quantity: 8, priceInCents: 12000 },
@@ -468,7 +580,7 @@ const clothesData: Prisma.ClothingCreateInput[] = [
       create: [
         {
           color: Color.BLACK,
-          imageUrl: '/clothing/terrex-hiking-pants/hiking-pants.jpg',
+          imageUrl: '/clothing/men/terrex-hiking-pants/hiking-pants.jpg',
           inventory: {
             create: [
               { size: Size.M, quantity: 8, priceInCents: 4999 },

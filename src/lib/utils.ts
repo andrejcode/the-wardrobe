@@ -1,5 +1,6 @@
 import { Color, Gender, Size } from '@prisma/client';
 import { CLOTHING_ITEMS_PER_PAGE } from './constants';
+import { ClothingWithVariationsAndInventory } from './definitions';
 
 /**
  * Returns the gender associated with a given section.
@@ -92,4 +93,21 @@ export function getColorsAndSizesArrayFromParams(
   }
 
   return { colorsArray, sizesArray };
+}
+
+// Return an array of unique sizes for a given clothing item.
+export function getUniqueSizes(
+  clothingItem: ClothingWithVariationsAndInventory
+) {
+  const sizes: Size[] = [];
+
+  clothingItem.clothingVariations.forEach((variation) => {
+    variation.inventory.forEach((item) => {
+      if (!sizes.includes(item.size)) {
+        sizes.push(item.size);
+      }
+    });
+  });
+
+  return sizes;
 }

@@ -14,6 +14,7 @@ interface ClothingProps {
   colors?: string[] | string;
   sizes?: string[] | string;
   clothingItemName?: string;
+  userId?: string;
 }
 
 export default async function Clothing({
@@ -25,6 +26,7 @@ export default async function Clothing({
   colors,
   sizes,
   clothingItemName,
+  userId,
 }: ClothingProps) {
   const gender = section ? getGenderForSection(section!) : undefined;
 
@@ -36,7 +38,8 @@ export default async function Clothing({
     subcategory,
     colors,
     sizes,
-    clothingItemName
+    clothingItemName,
+    userId
   );
 
   const clothingCount = await fetchClothingCount(
@@ -45,7 +48,8 @@ export default async function Clothing({
     subcategory,
     colors,
     sizes,
-    clothingItemName
+    clothingItemName,
+    userId
   );
 
   return (
