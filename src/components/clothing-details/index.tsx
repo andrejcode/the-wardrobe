@@ -78,7 +78,27 @@ export default async function ClothingDetails({
     return null;
   }
 
+  function calculateQuantity(): number | null {
+    if (!item) {
+      return null;
+    }
+
+    if (!size) {
+      return null;
+    }
+
+    if (size) {
+      const inventoryItem = item.clothingVariations[0].inventory.find(
+        (inventory) => inventory.size === size
+      );
+      return inventoryItem ? inventoryItem.quantity : null;
+    }
+
+    return null;
+  }
+
   const price = calculatePriceInCents();
+  const quantity = calculateQuantity();
 
   return (
     <section className="mx-4 mt-8 flex flex-col items-center justify-center md:mx-[10%] md:mt-16 md:flex-row">
@@ -102,7 +122,15 @@ export default async function ClothingDetails({
           <SizesParams sizes={uniqueSizes} />
 
           {price ? (
-            <p className="my-4 text-xl font-bold md:text-2xl">{price}&euro;</p>
+            quantity && quantity > 0 ? (
+              <p className="my-4 text-xl font-bold md:text-2xl">
+                {price}&euro;
+              </p>
+            ) : (
+              <p className="my-4 text-xl font-bold text-red-400 md:text-2xl">
+                Out of stock
+              </p>
+            )
           ) : (
             <p className="my-4 text-xl md:text-2xl">Select your size</p>
           )}
@@ -112,7 +140,11 @@ export default async function ClothingDetails({
           </Button>
 
           <div className="mt-3 flex items-center">
-            <Button rounded fullWidth={true} isDisabled={price === null}>
+            <Button
+              rounded
+              fullWidth={true}
+              isDisabled={price === null || quantity === null || quantity <= 0}
+            >
               Add to bag
             </Button>
             <SaveIcon
