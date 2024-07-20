@@ -8,6 +8,7 @@ interface ButtonProps {
   rounded?: boolean;
   Icon?: React.ElementType;
   type?: 'button' | 'submit' | 'reset';
+  isDisabled?: boolean;
 }
 
 export default function Button({
@@ -18,9 +19,11 @@ export default function Button({
   rounded = false,
   Icon,
   type = 'button',
+  isDisabled = false,
 }: ButtonProps) {
   return (
     <button
+      disabled={isDisabled}
       type={type}
       onClick={onClick}
       className={clsx(
@@ -32,6 +35,7 @@ export default function Button({
           'w-full': fullWidth,
           // prettier-ignore
           'rounded': rounded,
+          'cursor-not-allowed opacity-50 hover:bg-transparent': isDisabled,
         }
       )}
     >
