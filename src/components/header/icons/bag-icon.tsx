@@ -6,14 +6,20 @@ import Image from 'next/image';
 import { useBagStore } from '@/providers/bag-store-provider';
 import { useRouter } from 'next/navigation';
 import { Suspense, useState } from 'react';
+import { Session } from 'next-auth';
 
-export default function BagIcon() {
+export default function BagIcon({ session }: { session: Session | null }) {
   const { bag, removeFromBag } = useBagStore((state) => state);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!session || !session.user) {
+      router.push('/signin');
+      return;
+    }
 
     setIsLoading(true);
     try {

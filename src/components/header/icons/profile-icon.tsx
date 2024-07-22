@@ -1,12 +1,14 @@
 import IconDropdownMenu from './icon-dropdown-menu';
 import SignInIcon from './signin-icon';
-import { auth } from '@/auth';
 import UserProfileDropdown from './dropdowns/user-profile-dropdown';
 import { Suspense } from 'react';
+import { Session } from 'next-auth';
 
-export default async function ProfileIcon() {
-  const session = await auth();
-
+export default async function ProfileIcon({
+  session,
+}: {
+  session: Session | null;
+}) {
   if (!session || !session.user) {
     return <SignInIcon />;
   }

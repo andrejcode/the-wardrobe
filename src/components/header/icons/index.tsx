@@ -2,11 +2,14 @@ import { IoHeartOutline } from 'react-icons/io5';
 import BagIcon from './bag-icon';
 import ProfileIcon from './profile-icon';
 import Link from 'next/link';
+import { auth } from '@/auth';
 
-export default function Icons() {
+export default async function Icons() {
+  const session = await auth();
+
   return (
     <div className="flex items-center">
-      <ProfileIcon />
+      <ProfileIcon session={session} />
       <Link href="/wishlist">
         <IoHeartOutline
           className="mx-4 cursor-pointer"
@@ -14,7 +17,7 @@ export default function Icons() {
           title="Saved clothing items"
         />
       </Link>
-      <BagIcon />
+      <BagIcon session={session} />
     </div>
   );
 }
