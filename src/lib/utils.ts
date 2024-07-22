@@ -100,6 +100,7 @@ export function getUniqueSizes(
   clothingItem: ClothingWithVariationsAndInventory
 ) {
   const sizes: Size[] = [];
+  const order = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   clothingItem.clothingVariations.forEach((variation) => {
     variation.inventory.forEach((item) => {
@@ -108,6 +109,8 @@ export function getUniqueSizes(
       }
     });
   });
+
+  sizes.sort((a, b) => order.indexOf(a) - order.indexOf(b));
 
   return sizes;
 }
