@@ -11,10 +11,15 @@ how they will look before buying the clothing item.
 
 ## Table of Contents
 
+0. [Demo](#demo)
 1. [Installation](#installation)
 2. [Gettng Started](#getting-started)
 3. [Deploy on Vercel](#deploy-on-vercel)
 4. [Disclaimer](#disclaimer)
+
+## Demo
+
+You can preview the app [here](https://the-wardrobe.vercel.app/).
 
 ## Installation
 
