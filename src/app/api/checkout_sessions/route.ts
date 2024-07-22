@@ -1,6 +1,7 @@
 import { auth } from '@/auth';
 import { BagItem } from '@/lib/definitions';
-import stripe from '@/lib/stripe';
+import stripe from '@/lib/stripe/index';
+import getCustomer from '@/lib/stripe/get-customer';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -38,23 +39,11 @@ export async function POST(req: Request) {
       quantity: item.quantity,
     }));
 
-    const customers = await stripe.customers.list({
-      email,
-      limit: 1,
-    });
-    let customer;
-
-    if (customers.data.length === 0) {
-      customer = await stripe.customers.create({
-        email,
-      });
-    } else {
-      customer = customers.data[0];
-    }
+    const customerId = await getCustomer(email);
 
     const checkoutSession = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      customer: customer.id,
+      customer: customerId,
       line_items: lineItems,
       mode: 'payment',
       success_url,

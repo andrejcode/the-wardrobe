@@ -1,6 +1,8 @@
 import { auth } from '@/auth';
 import { PaymentDetails } from '@/lib/definitions';
 import stripe from '@/lib/stripe';
+import getCustomer from '@/lib/stripe/get-customer';
+import Stripe from 'stripe';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -16,28 +18,14 @@ export default async function ProfilePage() {
 
   const email = session.user.email ?? '';
 
-  const customers = await stripe.customers.list({
-    email,
-    limit: 1,
-  });
-  let customer;
-
-  if (customers.data.length === 0) {
-    customer = await stripe.customers.create({
-      email,
-    });
-  } else {
-    customer = customers.data[0];
-  }
-
-  const customerId = customer.id;
+  const customerId = await getCustomer(email);
 
   const paymentIntents = await stripe.paymentIntents.list({
     customer: customerId,
   });
 
   const detailedPayments: PaymentDetails[] = await Promise.all(
-    paymentIntents.data.map(async (paymentIntent) => {
+    paymentIntents.data.map(async (paymentIntent: Stripe.PaymentIntent) => {
       const charges = await stripe.charges.list({
         payment_intent: paymentIntent.id,
       });
