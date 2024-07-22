@@ -9,6 +9,7 @@ interface ButtonProps {
   Icon?: React.ElementType;
   type?: 'button' | 'submit' | 'reset';
   isDisabled?: boolean;
+  role?: string;
 }
 
 export default function Button({
@@ -20,11 +21,13 @@ export default function Button({
   Icon,
   type = 'button',
   isDisabled = false,
+  role = 'button',
 }: ButtonProps) {
   return (
     <button
       disabled={isDisabled}
       type={type}
+      role={role}
       onClick={onClick}
       className={clsx(
         'cursor-pointer border px-4 py-2 transition-colors duration-300 md:text-lg',

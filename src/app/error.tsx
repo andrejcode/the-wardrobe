@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/button';
-import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function Error({
   error,
@@ -10,12 +10,22 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h2 className="mb-2 text-lg">Something went wrong!</h2>
-      <Link href="/">
-        <Button rounded>Return Home</Button>
-      </Link>
+      <Button
+        rounded
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </Button>
     </div>
   );
 }

@@ -6,12 +6,19 @@ import { signOut } from 'next-auth/react';
 export default function UserProfileDropdown() {
   return (
     <ul className="mx-4 md:mx-0">
-      <li className="cursor-pointer px-3 py-4 hover:bg-lightGray">
-        <Link href="/profile">Profile</Link>
+      <li className="my-4">
+        <Link href="/profile" className="cursor-pointer p-4 hover:bg-lightGray">
+          Profile
+        </Link>
       </li>
 
-      <li className="mt-2 cursor-pointer px-3 py-4 hover:bg-lightGray">
-        <button onClick={() => signOut()}>Sign Out</button>
+      <li className="mt-4">
+        <button
+          className="cursor-pointer p-4 hover:bg-lightGray"
+          onClick={() => signOut()}
+        >
+          Sign Out
+        </button>
       </li>
     </ul>
   );
