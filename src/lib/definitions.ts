@@ -39,3 +39,17 @@ export type PaymentDetails = {
   charges: Stripe.Charge[];
   lineItems: Stripe.LineItem[];
 };
+
+export interface ImageOrMask {
+  url: string;
+  content_type: string;
+  file_name: string;
+  file_size: number;
+  width: number;
+  height: number;
+}
+
+export interface ImageMaskData {
+  image: ImageOrMask;
+  mask: ImageOrMask;
+}

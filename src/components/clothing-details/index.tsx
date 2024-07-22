@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Button from '../button';
 import SaveIcon from './save-icon';
 import ColorCirclesParams from './color-circles-params';
 import Description from './description';
@@ -14,6 +13,7 @@ import {
   fetchUserByEmail,
   isItemInWishlist,
 } from '@/lib/data';
+import VirtualTryOn from './virtual-try-on';
 
 export default async function ClothingDetails({
   id,
@@ -142,9 +142,7 @@ export default async function ClothingDetails({
             <p className="my-4 text-xl md:text-2xl">Select your size</p>
           )}
 
-          <Button rounded fullWidth={true}>
-            Virtual Try-On
-          </Button>
+          <VirtualTryOn />
 
           <div className="mt-3 flex items-center">
             <AddToBag

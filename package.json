@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.1",
+    "@fal-ai/serverless-client": "^0.13.0",
+    "@fal-ai/serverless-proxy": "^0.7.4",
     "@prisma/client": "^5.17.0",
     "@stripe/stripe-js": "^4.1.0",
     "@tailwindcss/forms": "^0.5.7",
