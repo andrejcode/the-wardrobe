@@ -27,6 +27,7 @@ Follow these steps to set up and run the project:
 1. **Create PostgreSQL Database:**
 
    - Create a PostgreSQL database and add its URL to the `.env` file.
+   - Note that when you create Vercel PostgreSQL you can copy `.env` variables
    - To run migrations and seed the database `npx prisma migrate dev`
    - To seed the database use command `npx prisma db seed`
    - To generate Prisma types `npx prisma generate`
