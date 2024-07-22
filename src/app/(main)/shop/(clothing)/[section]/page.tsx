@@ -30,7 +30,9 @@ export default async function SectionPage({
 
   return (
     <section className="flex flex-col">
-      <Filters />
+      <Suspense>
+        <Filters />
+      </Suspense>
       <Suspense fallback={<ClothingSkeleton />}>
         <Clothing
           title={`Clothing for ${section}`}

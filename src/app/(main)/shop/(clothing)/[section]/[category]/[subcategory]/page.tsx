@@ -33,7 +33,9 @@ export default function SubcategoryPage({
 
   return (
     <section className="flex flex-col">
-      <Filters />
+      <Suspense>
+        <Filters />
+      </Suspense>
       <Suspense fallback={<ClothingSkeleton />}>
         <Clothing
           title={`${subcategoryName} for ${section}`}

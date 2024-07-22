@@ -4,6 +4,7 @@ import { playfairDisplay } from '@/app/fonts';
 import { fetchClothing, fetchClothingCount } from '@/lib/data';
 import { getGenderForSection } from '@/lib/utils';
 import { CLOTHING_ITEMS_PER_PAGE } from '@/lib/constants';
+import { Suspense } from 'react';
 
 interface ClothingProps {
   title: string;
@@ -70,7 +71,11 @@ export default async function Clothing({
         )}
       </div>
 
-      {clothingCount > 0 && <Pagination itemCount={clothingCount} />}
+      {clothingCount > 0 && (
+        <Suspense>
+          <Pagination itemCount={clothingCount} />
+        </Suspense>
+      )}
     </div>
   );
 }

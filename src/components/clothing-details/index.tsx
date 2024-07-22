@@ -14,6 +14,7 @@ import {
   isItemInWishlist,
 } from '@/lib/data';
 import VirtualTryOn from './virtual-try-on';
+import { Suspense } from 'react';
 
 export default async function ClothingDetails({
   id,
@@ -125,8 +126,10 @@ export default async function ClothingDetails({
         <div className="max-w-96">
           <h1 className="text-xl font-bold md:text-2xl">{item.name}</h1>
 
-          <ColorCirclesParams variations={item.clothingVariations} />
-          <SizesParams sizes={uniqueSizes} />
+          <Suspense>
+            <ColorCirclesParams variations={item.clothingVariations} />
+            <SizesParams sizes={uniqueSizes} />
+          </Suspense>
 
           {priceInCents ? (
             quantity && quantity > 0 ? (

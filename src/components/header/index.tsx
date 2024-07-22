@@ -3,6 +3,7 @@ import Search from './search';
 import NavLinks from './nav-links';
 import Icons from './icons';
 import MobileMenu from './mobile-menu';
+import { Suspense } from 'react';
 
 export default function Header() {
   return (
@@ -14,13 +15,17 @@ export default function Header() {
         </div>
 
         <div className="flex items-center md:hidden">
-          <MobileMenu />
+          <Suspense>
+            <MobileMenu />
+          </Suspense>
           <Logo />
         </div>
 
-        <div className="mx-4 hidden md:block md:flex-grow">
-          <Search placeholder="Search for items" />
-        </div>
+        <Suspense>
+          <div className="mx-4 hidden md:block md:flex-grow">
+            <Search placeholder="Search for items" />
+          </div>
+        </Suspense>
 
         <Icons />
       </header>

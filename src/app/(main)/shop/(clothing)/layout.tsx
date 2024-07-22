@@ -1,6 +1,7 @@
 import Categories from '@/components/clothing/categories';
 import MobileCategories from '@/components/clothing/mobile-categories';
 import { fetchCategories } from '@/lib/data';
+import { Suspense } from 'react';
 
 export default async function Layout({
   children,
@@ -12,9 +13,11 @@ export default async function Layout({
   return (
     <>
       <div className="min-h-screen md:flex">
-        <div className="md:hidden">
-          <MobileCategories categories={categories} />
-        </div>
+        <Suspense>
+          <div className="md:hidden">
+            <MobileCategories categories={categories} />
+          </div>
+        </Suspense>
 
         <div className="hidden w-1/5 flex-none border-r border-lightGray md:block">
           <Categories categories={categories} />

@@ -2,6 +2,7 @@ import IconDropdownMenu from './icon-dropdown-menu';
 import SignInIcon from './signin-icon';
 import { auth } from '@/auth';
 import UserProfileDropdown from './dropdowns/user-profile-dropdown';
+import { Suspense } from 'react';
 
 export default async function ProfileIcon() {
   const session = await auth();
@@ -11,8 +12,10 @@ export default async function ProfileIcon() {
   }
 
   return (
-    <IconDropdownMenu iconName="IoPersonOutline" iconTitle="User profile">
-      <UserProfileDropdown />
-    </IconDropdownMenu>
+    <Suspense>
+      <IconDropdownMenu iconName="IoPersonOutline" iconTitle="User profile">
+        <UserProfileDropdown />
+      </IconDropdownMenu>
+    </Suspense>
   );
 }

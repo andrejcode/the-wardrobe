@@ -32,7 +32,9 @@ export default function CategoryPage({
 
   return (
     <section className="flex flex-col">
-      <Filters />
+      <Suspense>
+        <Filters />
+      </Suspense>
       <Suspense fallback={<ClothingSkeleton />}>
         <Clothing
           title={`${categoryName} for ${section}`}
