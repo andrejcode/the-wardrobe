@@ -6,6 +6,12 @@ datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
+
+  // For local environment
+  // url = env("DATABASE_URL")
+
+  // For test environment
+  // url = env("TEST_DATABASE_URL")
 }
 
 enum Gender {
