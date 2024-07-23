@@ -25,14 +25,18 @@ export default function ClothingItemPage({
 
   return (
     <>
-      <ClothingDetails id={id} color={color} size={size} />
+      <Suspense
+        fallback={<p className="m-4 text-lg font-bold">Loading item...</p>}
+      >
+        <ClothingDetails id={id} color={color} size={size} />
+      </Suspense>
       <section className="mx-4 mt-10 text-center md:text-left">
         <h2
           className={`${playfairDisplay.className} text-lg font-bold md:text-xl`}
         >
           Similar items
         </h2>
-        <Suspense fallback={<p>Looking for items...</p>}>
+        <Suspense fallback={<p className="mt-2">Looking for items...</p>}>
           <SimilarItems id={id} />
         </Suspense>
       </section>

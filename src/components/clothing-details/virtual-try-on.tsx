@@ -5,26 +5,29 @@ import Button from '../button';
 
 export default function VirtualTryOn() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  async function showVirtualTryOnImage() {
+  async function getVirtualTryOnImage() {
     setIsLoading(true);
+    setError(null);
 
     try {
       const response = await fetch('/api/virtual-try-on');
 
       if (!response.ok) {
-        throw new Error('Could not get virtual try-on image');
+        setError('Unable to get image. Try again!');
       }
 
       const data = await response.json();
 
       if (!data.imageUrl) {
-        throw new Error('Could not get virtual try-on image');
+        setError('Unable to get image. Try again!');
       }
 
       window.open(data.imageUrl, '_blank');
     } catch (error) {
       console.error(error);
+      setError('Unable to get image. Try again!');
     } finally {
       setIsLoading(false);
     }
@@ -35,9 +38,15 @@ export default function VirtualTryOn() {
       isDisabled={isLoading}
       fullWidth
       rounded
-      onClick={showVirtualTryOnImage}
+      onClick={getVirtualTryOnImage}
     >
-      {isLoading ? 'This could take a while...' : 'Virtual Try-On'}
+      {isLoading ? (
+        'This could take a while...'
+      ) : error ? (
+        <span className="text-red-500">{error}</span>
+      ) : (
+        'Virtual Try-On'
+      )}
     </Button>
   );
 }

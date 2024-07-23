@@ -34,8 +34,15 @@ export default async function ClothingDetails({
     user = await fetchUserByEmail(session.user.email);
   }
 
-  const item = await fetchClothingItemById(id, color, size);
-  const isInWishlist = user ? await isItemInWishlist(id, user.id) : false;
+  const itemPromise = await fetchClothingItemById(id, color, size);
+  const isInWishlistPromise = user
+    ? await isItemInWishlist(id, user.id)
+    : false;
+
+  const [item, isInWishlist] = await Promise.all([
+    itemPromise,
+    isInWishlistPromise,
+  ]);
 
   if (!item) {
     notFound();

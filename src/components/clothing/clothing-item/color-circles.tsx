@@ -22,6 +22,7 @@ export default function ColorCircles({
           })}
         >
           <button
+            data-testid={variation.color}
             onClick={(event) => {
               event.preventDefault();
               changeColor(variation.color);
