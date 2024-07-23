@@ -8,8 +8,14 @@ import { useRouter } from 'next/navigation';
 import { Suspense, useState } from 'react';
 import { Session } from 'next-auth';
 
-export default function BagIcon({ session }: { session: Session | null }) {
-  const { bag, removeFromBag } = useBagStore((state) => state);
+interface BagIconProps {
+  session: Session | null;
+}
+
+export default function BagIcon({ session }: BagIconProps) {
+  const bag = useBagStore((state) => state.bag);
+  const removeFromBag = useBagStore((state) => state.removeFromBag);
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 

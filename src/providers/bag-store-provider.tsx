@@ -14,7 +14,7 @@ export interface BagStoreProviderProps {
   children: ReactNode;
 }
 
-export const BagStoreProvider = ({ children }: BagStoreProviderProps) => {
+export function BagStoreProvider({ children }: BagStoreProviderProps) {
   const storeRef = useRef<BagStoreApi>();
   if (!storeRef.current) {
     storeRef.current = createBagStore();
@@ -25,9 +25,9 @@ export const BagStoreProvider = ({ children }: BagStoreProviderProps) => {
       {children}
     </BagStoreContext.Provider>
   );
-};
+}
 
-export const useBagStore = <T,>(selector: (store: BagStore) => T): T => {
+export function useBagStore<T>(selector: (store: BagStore) => T): T {
   const bagStoreContext = useContext(BagStoreContext);
 
   if (!bagStoreContext) {
@@ -35,4 +35,4 @@ export const useBagStore = <T,>(selector: (store: BagStore) => T): T => {
   }
 
   return useStore(bagStoreContext, selector);
-};
+}

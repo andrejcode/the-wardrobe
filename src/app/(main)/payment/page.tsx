@@ -1,8 +1,15 @@
-export default async function Page({
-  searchParams,
-}: {
+import Button from '@/components/button';
+import Link from 'next/link';
+import {
+  IoCheckmarkCircleOutline,
+  IoCloseCircleOutline,
+} from 'react-icons/io5';
+
+interface PaymentPageProps {
   searchParams?: { session_id?: string; success?: boolean; canceled?: boolean };
-}) {
+}
+
+export default async function PaymentPage({ searchParams }: PaymentPageProps) {
   const sessionId = searchParams?.session_id;
   const success = searchParams?.success;
   const canceled = searchParams?.canceled;
@@ -40,10 +47,22 @@ export default async function Page({
   }
 
   return (
-    <div className="flex h-[90vh] w-screen items-center justify-center">
-      <h1 className="text-xl font-bold">
-        Payment {success ? 'Successful' : 'Canceled'}
+    <div className="flex h-[90vh] w-screen flex-col items-center justify-center">
+      {success && <IoCheckmarkCircleOutline size={64} color="green" />}
+      {canceled && <IoCloseCircleOutline size={64} color="red" />}
+      <h1 className="my-4 text-xl font-bold">
+        Payment {success ? 'Successful' : canceled ? 'Canceled' : 'Staus'}
       </h1>
+      {!success && !canceled && (
+        <p className="mb-4">
+          Payments status will be displayed here after the purchase.
+        </p>
+      )}
+      <Link href="/shop/all">
+        <Button role="link" rounded>
+          Continue Shopping
+        </Button>
+      </Link>
     </div>
   );
 }

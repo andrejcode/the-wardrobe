@@ -1,15 +1,17 @@
-import { ClothingVariations, Color } from '@prisma/client';
+import { ClothingVariation, Color } from '@prisma/client';
 import clsx from 'clsx';
+
+interface ColorCirclesProps {
+  activeColor: Color;
+  variations: ClothingVariation[];
+  changeColor: (color: Color) => void;
+}
 
 export default function ColorCircles({
   activeColor,
   variations,
   changeColor,
-}: {
-  activeColor: Color;
-  variations: ClothingVariations[];
-  changeColor: (color: Color) => void;
-}) {
+}: ColorCirclesProps) {
   return (
     <div className="my-2 flex items-center space-x-2">
       {variations.map((variation) => (

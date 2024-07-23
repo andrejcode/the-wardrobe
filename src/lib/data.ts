@@ -1,16 +1,14 @@
 import prisma from '@/lib/prisma';
 import { Color, Gender, Size, User } from '@prisma/client';
 import {
-  CategoriesWithSubcategories,
-  ClothingWithClothingVariations,
-  ClothingWithVariationsAndInventory,
+  CategoryWithSubcategories,
+  ClothingItemWithClothingVariations,
+  ClothingItemWithVariationsAndInventory,
 } from './definitions';
 import { getColorsAndSizesArrayFromParams } from './utils';
 
-export async function fetchCategories(): Promise<
-  CategoriesWithSubcategories[]
-> {
-  const categories = await prisma.categories.findMany({
+export async function fetchCategories(): Promise<CategoryWithSubcategories[]> {
+  const categories = await prisma.category.findMany({
     include: {
       subcategories: true,
     },
@@ -43,13 +41,13 @@ export async function fetchClothing(
   sizes?: string[] | string,
   name?: string,
   userId?: string
-): Promise<ClothingWithVariationsAndInventory[]> {
+): Promise<ClothingItemWithVariationsAndInventory[]> {
   const { colorsArray, sizesArray } = getColorsAndSizesArrayFromParams(
     colors,
     sizes
   );
 
-  const clothing = await prisma.clothing.findMany({
+  const clothing = await prisma.clothingItem.findMany({
     where: {
       name: {
         contains: name,
@@ -107,7 +105,7 @@ export async function fetchClothingCount(
     sizes
   );
 
-  const count = await prisma.clothing.count({
+  const count = await prisma.clothingItem.count({
     where: {
       name: name,
       gender: gender,
@@ -141,8 +139,8 @@ export async function fetchClothingItemById(
   id: number,
   color?: Color,
   size?: Size
-): Promise<ClothingWithVariationsAndInventory | null> {
-  const clothingItem = await prisma.clothing.findUnique({
+): Promise<ClothingItemWithVariationsAndInventory | null> {
+  const clothingItem = await prisma.clothingItem.findUnique({
     where: {
       id,
       clothingVariations: {
@@ -218,8 +216,8 @@ export async function isItemInWishlist(id: number, userId: string) {
 
 export async function fetchSimilarClothingItems(
   id: number
-): Promise<ClothingWithClothingVariations[] | null> {
-  const clothingItem = await prisma.clothing.findUnique({
+): Promise<ClothingItemWithClothingVariations[] | null> {
+  const clothingItem = await prisma.clothingItem.findUnique({
     select: {
       category: true,
     },
@@ -232,7 +230,7 @@ export async function fetchSimilarClothingItems(
     return null;
   }
 
-  const clothingItems = await prisma.clothing.findMany({
+  const clothingItems = await prisma.clothingItem.findMany({
     take: 5,
     where: {
       id: {

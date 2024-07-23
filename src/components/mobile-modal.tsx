@@ -1,12 +1,14 @@
 import { IoCloseOutline } from 'react-icons/io5';
 
+interface MobileModalProps {
+  children: React.ReactNode;
+  closeModal: () => void;
+}
+
 export default function MobileModal({
   children,
   closeModal,
-}: {
-  children: React.ReactNode;
-  closeModal: () => void;
-}) {
+}: MobileModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex h-screen flex-col bg-white text-black md:hidden">
       <IoCloseOutline

@@ -4,11 +4,11 @@ import UserProfileDropdown from './dropdowns/user-profile-dropdown';
 import { Suspense } from 'react';
 import { Session } from 'next-auth';
 
-export default async function ProfileIcon({
-  session,
-}: {
+interface ProfileIconProps {
   session: Session | null;
-}) {
+}
+
+export default async function ProfileIcon({ session }: ProfileIconProps) {
   if (!session || !session.user) {
     return <SignInIcon />;
   }

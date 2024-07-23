@@ -1,15 +1,13 @@
 import { addOrRemoveFromWishlist } from '@/lib/actions';
 import { IoHeartOutline, IoHeart } from 'react-icons/io5';
 
-export default function SaveIcon({
-  id,
-  userId,
-  isInWishlist,
-}: {
+interface SaveIconProps {
   id: number;
   userId: string | null;
   isInWishlist: boolean;
-}) {
+}
+
+export default function SaveIcon({ id, userId, isInWishlist }: SaveIconProps) {
   const addOrRemoveFromWishlistWithIds = addOrRemoveFromWishlist.bind(
     null,
     id,

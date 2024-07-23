@@ -1,6 +1,6 @@
 import { Prisma, Gender, Size, Color } from '@prisma/client';
 
-const clothesData: Prisma.ClothingCreateInput[] = [
+const clothingData: Prisma.ClothingItemCreateInput[] = [
   // Women
   {
     name: 'ZARA Floral Summer Dress',
@@ -594,4 +594,4 @@ const clothesData: Prisma.ClothingCreateInput[] = [
   },
 ];
 
-export default clothesData;
+export default clothingData;

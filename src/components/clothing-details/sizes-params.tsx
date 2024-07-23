@@ -5,7 +5,11 @@ import clsx from 'clsx';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function SizesParams({ sizes }: { sizes: Size[] }) {
+interface SizesParamsProps {
+  sizes: Size[];
+}
+
+export default function SizesParams({ sizes }: SizesParamsProps) {
   const [activeSize, setActiveSize] = useState<Size | null>(null);
 
   const pathname = usePathname();

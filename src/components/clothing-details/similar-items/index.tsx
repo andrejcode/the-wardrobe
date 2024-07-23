@@ -1,7 +1,11 @@
 import { fetchSimilarClothingItems } from '@/lib/data';
 import SimilarItem from './similar-item';
 
-export default async function SimilarItems({ id }: { id: number }) {
+interface SimilarItemsProps {
+  id: number;
+}
+
+export default async function SimilarItems({ id }: SimilarItemsProps) {
   const similarItems = await fetchSimilarClothingItems(id);
 
   if (!similarItems || similarItems.length === 0) {

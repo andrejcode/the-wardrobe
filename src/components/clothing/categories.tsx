@@ -1,16 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { CategoriesWithSubcategories } from '@/lib/definitions';
+import { CategoryWithSubcategories } from '@/lib/definitions';
 import { getParamFromCategoryName } from '@/lib/utils';
 import { useParams } from 'next/navigation';
 import { Gender } from '@prisma/client';
 
-export default function Categories({
-  categories,
-}: {
-  categories: CategoriesWithSubcategories[];
-}) {
+interface CategoriesProps {
+  categories: CategoryWithSubcategories[];
+}
+
+export default function Categories({ categories }: CategoriesProps) {
   const params = useParams<{ section: string }>();
 
   const filteredCategories = categories.filter((category) => {

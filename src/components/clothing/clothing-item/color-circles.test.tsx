@@ -11,7 +11,7 @@ test('renders color circles correctly', () => {
       imageUrl: '',
       createdAt: new Date(),
       updatedAt: new Date(),
-      clothesId: 0,
+      clothingItemId: 0,
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ test('renders color circles correctly', () => {
       imageUrl: '',
       createdAt: new Date(),
       updatedAt: new Date(),
-      clothesId: 0,
+      clothingItemId: 0,
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ test('renders color circles correctly', () => {
       imageUrl: '',
       createdAt: new Date(),
       updatedAt: new Date(),
-      clothesId: 0,
+      clothingItemId: 0,
     },
   ];
   const changeColor = jest.fn();

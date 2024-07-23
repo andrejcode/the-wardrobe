@@ -7,11 +7,13 @@ export const metadata: Metadata = {
   description: 'Online clothing store',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+type ReadonlyRootLayoutProps = Readonly<RootLayoutProps>;
+
+export default function RootLayout({ children }: ReadonlyRootLayoutProps) {
   return (
     <html lang="en">
       <body className={`${openSans.className} antialiased`}>{children}</body>

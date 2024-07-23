@@ -1,11 +1,11 @@
-import { ClothingWithVariationsAndInventory } from '@/lib/definitions';
+import { ClothingItemWithVariationsAndInventory } from '@/lib/definitions';
 import { getUniqueSizes } from '@/lib/utils';
 
-export default function Sizes({
-  clothingItem,
-}: {
-  clothingItem: ClothingWithVariationsAndInventory;
-}) {
+interface SizesProps {
+  clothingItem: ClothingItemWithVariationsAndInventory;
+}
+
+export default function Sizes({ clothingItem }: SizesProps) {
   return (
     <p>
       <span className="font-bold">Available in: </span>

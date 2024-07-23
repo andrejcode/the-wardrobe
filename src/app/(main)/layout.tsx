@@ -2,7 +2,11 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { BagStoreProvider } from '@/providers/bag-store-provider';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <BagStoreProvider>
       <Header />

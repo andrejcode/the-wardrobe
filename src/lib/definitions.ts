@@ -1,29 +1,29 @@
 import type {
-  Categories,
-  Subcategories,
-  Clothing,
-  ClothingVariations,
+  Category,
+  Subcategory,
+  ClothingItem,
+  ClothingVariation,
   Inventory,
 } from '@prisma/client';
 import Stripe from 'stripe';
 
-export type CategoriesWithSubcategories = Categories & {
-  subcategories?: Subcategories[];
+export type CategoryWithSubcategories = Category & {
+  subcategories?: Subcategory[];
 };
 
-export type ClothingVariationWithInventory = ClothingVariations & {
+export type ClothingVariationWithInventory = ClothingVariation & {
   inventory: Inventory[];
 };
 
-export type ClothingWithClothingVariations = Clothing & {
-  clothingVariations: ClothingVariations[];
+export type ClothingItemWithClothingVariations = ClothingItem & {
+  clothingVariations: ClothingVariation[];
 };
 
-export type ClothingWithVariationsAndInventory = Clothing & {
+export type ClothingItemWithVariationsAndInventory = ClothingItem & {
   clothingVariations: ClothingVariationWithInventory[];
 };
 
-export type BagItem = {
+export interface BagItem {
   id: number;
   clothingId: number;
   name: string;
@@ -32,13 +32,13 @@ export type BagItem = {
   quantity: number;
   imageUrl: string;
   priceInCents: number;
-};
+}
 
-export type PaymentDetails = {
+export interface PaymentDetails {
   paymentIntent: Stripe.PaymentIntent;
   charges: Stripe.Charge[];
   lineItems: Stripe.LineItem[];
-};
+}
 
 export interface ImageOrMask {
   url: string;

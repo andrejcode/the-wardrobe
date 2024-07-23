@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="relative h-[70vh]">
       <Image
         src="/hero-image.jpg"
-        alt="Clothes hanging on a rack"
+        alt="Clothing hanging on a rack"
         fill={true}
         className="object-cover"
         quality={50}

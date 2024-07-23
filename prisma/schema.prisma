@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
@@ -36,62 +36,60 @@ enum Color {
   ORANGE
 }
 
-model Categories {
-  id            Int             @id @default(autoincrement())
+model Category {
+  id            Int            @id @default(autoincrement())
   name          String
   gender        Gender
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  clothes       Clothing[]
-  subcategories Subcategories[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  clothing      ClothingItem[]
+  subcategories Subcategory[]
 }
 
-model Subcategories {
-  id         Int        @id @default(autoincrement())
+model Subcategory {
+  id         Int            @id @default(autoincrement())
   name       String
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  category   Categories @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  category   Category       @relation(fields: [categoryId], references: [id])
   categoryId Int
-  clothes    Clothing[]
+  clothing   ClothingItem[]
 }
 
-model Clothing {
-  id                 Int                  @id @default(autoincrement())
+model ClothingItem {
+  id                 Int                 @id @default(autoincrement())
   name               String
-  // brand         String
-  // brandLogo     String
   gender             Gender
   description        String
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  category           Categories           @relation(fields: [categoryId], references: [id])
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  category           Category            @relation(fields: [categoryId], references: [id])
   categoryId         Int
-  subcategory        Subcategories?       @relation(fields: [subcategoryId], references: [id])
+  subcategory        Subcategory?        @relation(fields: [subcategoryId], references: [id])
   subcategoryId      Int?
-  clothingVariations ClothingVariations[]
+  clothingVariations ClothingVariation[]
   wishlist           Wishlist[]
 }
 
-model ClothingVariations {
-  id        Int         @id @default(autoincrement())
-  color     Color
-  imageUrl  String
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  clothes   Clothing    @relation(fields: [clothesId], references: [id])
-  clothesId Int
-  inventory Inventory[]
+model ClothingVariation {
+  id             Int          @id @default(autoincrement())
+  color          Color
+  imageUrl       String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  clothingItem   ClothingItem @relation(fields: [clothingItemId], references: [id])
+  clothingItemId Int
+  inventory      Inventory[]
 }
 
 model Inventory {
-  id                  Int                @id @default(autoincrement())
+  id                  Int               @id @default(autoincrement())
   size                Size
   quantity            Int
   priceInCents        Int
-  createdAt           DateTime           @default(now())
-  updatedAt           DateTime           @updatedAt
-  clothingVariation   ClothingVariations @relation(fields: [clothingVariationId], references: [id])
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  clothingVariation   ClothingVariation @relation(fields: [clothingVariationId], references: [id])
   clothingVariationId Int
 }
 
@@ -169,13 +167,20 @@ model Authenticator {
 }
 
 model Wishlist {
-  id         Int      @default(autoincrement())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String
-  clothing   Clothing @relation(fields: [clothingId], references: [id])
-  clothingId Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           Int          @default(autoincrement())
+  user         User         @relation(fields: [userId], references: [id])
+  userId       String
+  clothingItem ClothingItem @relation(fields: [clothingId], references: [id])
+  clothingId   Int
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
   @@id([userId, clothingId])
+}
+
+model StripeSession {
+  id        Int      @id @default(autoincrement())
+  sessionId String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -1,6 +1,6 @@
 import { Color, Gender, Size } from '@prisma/client';
 import { CLOTHING_ITEMS_PER_PAGE } from './constants';
-import { ClothingWithVariationsAndInventory } from './definitions';
+import { ClothingItemWithVariationsAndInventory } from './definitions';
 
 /**
  * Returns the gender associated with a given section.
@@ -97,7 +97,7 @@ export function getColorsAndSizesArrayFromParams(
 
 // Return an array of unique sizes for a given clothing item.
 export function getUniqueSizes(
-  clothingItem: ClothingWithVariationsAndInventory
+  clothingItem: ClothingItemWithVariationsAndInventory
 ) {
   const sizes: Size[] = [];
   const order = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
@@ -113,4 +113,21 @@ export function getUniqueSizes(
   sizes.sort((a, b) => order.indexOf(a) - order.indexOf(b));
 
   return sizes;
+}
+
+export function findSmallestPriceInCents(
+  clothingItem: ClothingItemWithVariationsAndInventory
+) {
+  let smallestPrice =
+    clothingItem.clothingVariations[0].inventory[0].priceInCents ?? 10000;
+
+  clothingItem.clothingVariations.forEach((variation) => {
+    variation.inventory.forEach((item) => {
+      if (item.priceInCents < smallestPrice) {
+        smallestPrice = item.priceInCents;
+      }
+    });
+  });
+
+  return smallestPrice / 100; // Maybe add toFixed(2) here.
 }

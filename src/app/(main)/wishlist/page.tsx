@@ -5,13 +5,13 @@ import { fetchUserByEmail } from '@/lib/data';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
-export default async function Wishlist({
-  searchParams,
-}: {
+interface WishlistProps {
   searchParams?: {
     page?: string;
   };
-}) {
+}
+
+export default async function Wishlist({ searchParams }: WishlistProps) {
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const session = await auth();
 

@@ -69,28 +69,52 @@ export default async function ProfilePage() {
         {detailedPayments.length === 0 ? (
           <p>No payments found</p>
         ) : (
-          detailedPayments.map((payment) => (
-            <div key={payment.paymentIntent.id} className="mb-4">
-              <h3>Payment ID: {payment.paymentIntent.id}</h3>
-              <p>
-                Date:{' '}
-                {new Date(
-                  payment.paymentIntent.created * 1000
-                ).toLocaleDateString()}
-              </p>
-              <p>Amount: {payment.paymentIntent.amount / 100}&euro;</p>
-              <p>Status: {payment.paymentIntent.status}</p>
-              <h4>Items:</h4>
-              <ul className="ml-4">
-                {payment.lineItems.map((item) => (
-                  <li key={item.id}>
-                    {item.description} - {item.amount_total / 100}{' '}
-                    {item.currency.toUpperCase()}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
+          <table className="min-w-full bg-white">
+            <thead>
+              <tr className="text-left">
+                <th className="border-b border-gray-200 px-4 py-2">
+                  Payment ID
+                </th>
+                <th className="border-b border-gray-200 px-4 py-2">Date</th>
+                <th className="border-b border-gray-200 px-4 py-2">Amount</th>
+                <th className="border-b border-gray-200 px-4 py-2">Status</th>
+                <th className="border-b border-gray-200 px-4 py-2">Items</th>
+              </tr>
+            </thead>
+            <tbody>
+              {detailedPayments.map((payment, index) => (
+                <tr
+                  key={payment.paymentIntent.id}
+                  className={index % 2 === 0 ? 'bg-gray-100' : ''}
+                >
+                  <td className="border-b border-gray-200 px-4 py-2">
+                    {payment.paymentIntent.id}
+                  </td>
+                  <td className="border-b border-gray-200 px-4 py-2">
+                    {new Date(
+                      payment.paymentIntent.created * 1000
+                    ).toLocaleDateString()}
+                  </td>
+                  <td className="border-b border-gray-200 px-4 py-2">
+                    {payment.paymentIntent.amount / 100}&euro;
+                  </td>
+                  <td className="border-b border-gray-200 px-4 py-2">
+                    {payment.paymentIntent.status}
+                  </td>
+                  <td className="border-b border-gray-200 px-4 py-2">
+                    <ul className="ml-4 list-disc">
+                      {payment.lineItems.map((item) => (
+                        <li key={item.id}>
+                          {item.description} - {item.amount_total / 100}{' '}
+                          {item.currency.toUpperCase()}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </>

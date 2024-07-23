@@ -1,15 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface SimilarItemProps {
+  itemId: number;
+  imageUrl: string;
+  title: string;
+}
+
 export default function SimilarItem({
   itemId,
   imageUrl,
   title,
-}: {
-  itemId: number;
-  imageUrl: string;
-  title: string;
-}) {
+}: SimilarItemProps) {
   return (
     <Link href={`/shop/clothing-item/${itemId}`}>
       <div className="my-4 flex cursor-pointer flex-col items-center border border-black shadow-lg md:mr-4">

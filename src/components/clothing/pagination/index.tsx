@@ -5,7 +5,11 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { calculatePages } from '@/lib/utils';
 import PaginationArrow from './pagination-arrow';
 
-export default function Pagination({ itemCount }: { itemCount: number }) {
+interface PaginationProps {
+  itemCount: number;
+}
+
+export default function Pagination({ itemCount }: PaginationProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

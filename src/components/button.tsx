@@ -30,7 +30,7 @@ export default function Button({
       role={role}
       onClick={onClick}
       className={clsx(
-        'cursor-pointer border px-4 py-2 transition-colors duration-300 md:text-lg',
+        'border px-4 py-2 transition-colors duration-300 md:text-lg',
         {
           'border-black text-black hover:bg-black hover:text-white':
             inverse === false,
@@ -39,6 +39,7 @@ export default function Button({
           // prettier-ignore
           'rounded': rounded,
           'cursor-not-allowed opacity-50 hover:bg-transparent': isDisabled,
+          'cursor-pointer': !isDisabled,
         }
       )}
     >

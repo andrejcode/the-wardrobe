@@ -4,7 +4,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 
-export default function Search({ placeholder }: { placeholder: string }) {
+interface SearchProps {
+  placeholder: string;
+}
+
+export default function Search({ placeholder }: SearchProps) {
   const [term, setTerm] = useState('');
 
   const { replace } = useRouter();

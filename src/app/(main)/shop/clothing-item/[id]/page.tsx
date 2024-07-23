@@ -4,13 +4,20 @@ import { playfairDisplay } from '@/app/fonts';
 import { Suspense } from 'react';
 import SimilarItems from '@/components/clothing-details/similar-items';
 
+interface ClothingItemPageProps {
+  params: {
+    id: string;
+  };
+  searchParams?: {
+    color?: string;
+    size?: string;
+  };
+}
+
 export default function ClothingItemPage({
   params,
   searchParams,
-}: {
-  params: { id: string };
-  searchParams?: { color?: string; size?: string };
-}) {
+}: ClothingItemPageProps) {
   const id = Number(params.id);
 
   const color = searchParams?.color?.toUpperCase() as Color;

@@ -1,16 +1,18 @@
 import Link from 'next/link';
-import { type Categories } from '@prisma/client';
+import { type Category } from '@prisma/client';
 import { playfairDisplay } from '@/app/fonts';
 import { getParamFromCategoryName } from '@/lib/utils';
+
+interface HomeCategoriesProps {
+  categories: Category[];
+  categoryFor: 'women' | 'men';
+}
 
 export default function HomeCategories({
   categories,
   // We are appending title to the categories string but also each category name.
   categoryFor,
-}: {
-  categories: Categories[];
-  categoryFor: 'women' | 'men';
-}) {
+}: HomeCategoriesProps) {
   const title = `${categoryFor.charAt(0).toUpperCase()}${categoryFor.slice(1)}'s`;
 
   return (

@@ -6,14 +6,14 @@ import Link from 'next/link';
 import Sizes from './sizes';
 import ColorCircles from './color-circles';
 import SmallestPrice from './smallest-price';
-import { ClothingWithVariationsAndInventory } from '@/lib/definitions';
+import { ClothingItemWithVariationsAndInventory } from '@/lib/definitions';
 import { Color } from '@prisma/client';
 
-export default function ClothingItem({
-  clothingItem,
-}: {
-  clothingItem: ClothingWithVariationsAndInventory;
-}) {
+interface ClothingItemProps {
+  clothingItem: ClothingItemWithVariationsAndInventory;
+}
+
+export default function ClothingItem({ clothingItem }: ClothingItemProps) {
   const [activeColor, setActiveColor] = useState<Color>(
     clothingItem.clothingVariations[0].color
   );

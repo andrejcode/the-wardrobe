@@ -16,15 +16,17 @@ import {
 import VirtualTryOn from './virtual-try-on';
 import { Suspense } from 'react';
 
+interface ClothingDetailsProps {
+  id: number;
+  color?: Color;
+  size?: Size;
+}
+
 export default async function ClothingDetails({
   id,
   color,
   size,
-}: {
-  id: number;
-  color?: Color;
-  size?: Size;
-}) {
+}: ClothingDetailsProps) {
   const session = await auth();
 
   let user: User | null = null;

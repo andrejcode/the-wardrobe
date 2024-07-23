@@ -6,17 +6,19 @@ import { getCategoryNameFromParam } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-export default function CategoryPage({
-  params,
-  searchParams,
-}: {
+interface CategoryPageProps {
   params: { section: string; category: string };
   searchParams?: {
     page?: string;
     color?: string | string[];
     size?: string | string[];
   };
-}) {
+}
+
+export default function CategoryPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
   const { section, category } = params;
 
   if (!SECTIONS.includes(section)) {

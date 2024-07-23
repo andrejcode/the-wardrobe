@@ -5,17 +5,19 @@ import ClothingSkeleton from '@/components/clothing/clothing-skeleton';
 import { SECTIONS } from '@/lib/constants';
 import Filters from '@/components/clothing/filters';
 
-export default async function SectionPage({
-  params,
-  searchParams,
-}: {
+interface SectionPageProps {
   params: { section: string };
   searchParams?: {
     page?: string;
     color?: string | string[];
     size?: string | string[];
   };
-}) {
+}
+
+export default async function SectionPage({
+  params,
+  searchParams,
+}: SectionPageProps) {
   const section = params.section;
 
   if (!SECTIONS.includes(section)) {

@@ -1,4 +1,8 @@
-export default function PlaceholderPage({ title }: { title: string }) {
+interface PlaceholderPageProps {
+  title: string;
+}
+
+export default function PlaceholderPage({ title }: PlaceholderPageProps) {
   return (
     <section className="flex h-screen flex-col items-center justify-center">
       <div className="max-w-md text-center">

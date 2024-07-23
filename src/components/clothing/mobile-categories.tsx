@@ -3,14 +3,16 @@
 import useMobileModal from '@/hooks/useMobileModal';
 import MobileModal from '@/components/mobile-modal';
 import Categories from '@/components/clothing/categories';
-import { CategoriesWithSubcategories } from '@/lib/definitions';
+import { CategoryWithSubcategories } from '@/lib/definitions';
 import DropdownButton from '../dropdown-button';
+
+interface MobileCategoriesProps {
+  categories: CategoryWithSubcategories[];
+}
 
 export default function MobileCategories({
   categories,
-}: {
-  categories: CategoriesWithSubcategories[];
-}) {
+}: MobileCategoriesProps) {
   const { isOpen, openModal, closeModal } = useMobileModal();
 
   return (

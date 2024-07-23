@@ -7,16 +7,18 @@ import { useEffect, useRef, useState } from 'react';
 import { IoPersonOutline, IoBagOutline } from 'react-icons/io5';
 import clsx from 'clsx';
 
+interface IconDropdownMenuProps {
+  iconName: 'IoPersonOutline' | 'IoBagOutline';
+  iconTitle: string;
+  children: React.ReactNode;
+}
+
 export default function IconDropdownMenu({
   iconName,
   iconTitle,
   children,
-}: {
-  iconName: 'IoPersonOutline' | 'IoBagOutline';
-  iconTitle: string;
-  children: React.ReactNode;
-}) {
-  const { bag } = useBagStore((state) => state);
+}: IconDropdownMenuProps) {
+  const bag = useBagStore((state) => state.bag);
 
   const [isShown, setIsShown] = useState(false);
   const { isOpen, openModal, closeModal } = useMobileModal();

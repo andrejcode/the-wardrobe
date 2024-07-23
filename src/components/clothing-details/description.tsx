@@ -4,7 +4,11 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { IoCaretDownOutline, IoCaretUpOutline } from 'react-icons/io5';
 
-export default function Description({ description }: { description: string }) {
+interface DescriptionProps {
+  description: string;
+}
+
+export default function Description({ description }: DescriptionProps) {
   const [isShown, setIsShown] = useState(false);
 
   function toggleDescription() {

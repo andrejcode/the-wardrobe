@@ -1,6 +1,6 @@
 import { Prisma, Gender } from '@prisma/client';
 
-const categoriesData: Prisma.CategoriesCreateInput[] = [
+const categoriesData: Prisma.CategoryCreateInput[] = [
   {
     name: 'T-shirts',
     gender: Gender.UNISEX,

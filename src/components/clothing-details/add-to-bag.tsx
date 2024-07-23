@@ -2,7 +2,7 @@
 
 import { useBagStore } from '@/providers/bag-store-provider';
 import Button from '../button';
-import { ClothingWithVariationsAndInventory } from '@/lib/definitions';
+import { ClothingItemWithVariationsAndInventory } from '@/lib/definitions';
 import { loadStripe } from '@stripe/stripe-js';
 import { Color, Size } from '@prisma/client';
 import { useState } from 'react';
@@ -17,6 +17,15 @@ if (!stripePromise) {
   );
 }
 
+interface AddToBagProps {
+  item: ClothingItemWithVariationsAndInventory;
+  priceInCents: number | null;
+  quantity: number | null;
+  color: Color | undefined;
+  size: Size | undefined;
+  imageUrl: string | null;
+}
+
 export default function AddToBag({
   item,
   priceInCents,
@@ -24,15 +33,10 @@ export default function AddToBag({
   color,
   size,
   imageUrl,
-}: {
-  item: ClothingWithVariationsAndInventory;
-  priceInCents: number | null;
-  quantity: number | null;
-  color: Color | undefined;
-  size: Size | undefined;
-  imageUrl: string | null;
-}) {
-  const { bag, addToBag, updateQuantity } = useBagStore((state) => state);
+}: AddToBagProps) {
+  const bag = useBagStore((state) => state.bag);
+  const addToBag = useBagStore((state) => state.addToBag);
+  const updateQuantity = useBagStore((state) => state.updateQuantity);
 
   const [error, setError] = useState<string | null>(null);
 

@@ -8,6 +8,25 @@ export async function POST(req: NextRequest) {
   try {
     const { sessionId } = await req.json();
 
+    const sessionFound = await prisma.stripeSession.findUnique({
+      where: {
+        sessionId,
+      },
+    });
+
+    if (sessionFound) {
+      return NextResponse.json(
+        { error: 'Session already processed' },
+        { status: 400 }
+      );
+    } else {
+      await prisma.stripeSession.create({
+        data: {
+          sessionId,
+        },
+      });
+    }
+
     if (!sessionId) {
       return NextResponse.json(
         { error: 'Session ID is required' },
@@ -29,10 +48,10 @@ export async function POST(req: NextRequest) {
     const items = JSON.parse(session.metadata!.items) as BagItem[];
 
     items.forEach(async (item) => {
-      const clothingVariation = await prisma.clothingVariations.findFirst({
+      const clothingVariation = await prisma.clothingVariation.findFirst({
         where: {
           color: item.color as Color,
-          clothesId: item.clothingId,
+          clothingItemId: item.clothingId,
         },
       });
 
@@ -50,8 +69,6 @@ export async function POST(req: NextRequest) {
       if (!inventoryItem) {
         throw new Error('Inventory item not found');
       }
-
-      console.log('Item quantity', item.quantity);
 
       const updatedInventoryItem = await prisma.inventory.update({
         where: {

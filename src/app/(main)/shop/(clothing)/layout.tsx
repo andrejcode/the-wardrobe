@@ -3,11 +3,11 @@ import MobileCategories from '@/components/clothing/mobile-categories';
 import { fetchCategories } from '@/lib/data';
 import { Suspense } from 'react';
 
-export default async function Layout({
-  children,
-}: {
+interface LayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default async function Layout({ children }: LayoutProps) {
   const categories = await fetchCategories();
 
   return (

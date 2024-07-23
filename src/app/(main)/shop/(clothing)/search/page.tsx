@@ -2,11 +2,14 @@ import Clothing from '@/components/clothing';
 import ClothingSkeleton from '@/components/clothing/clothing-skeleton';
 import { Suspense } from 'react';
 
-export default function SearchPage({
-  searchParams,
-}: {
-  searchParams?: { q?: string; page?: string };
-}) {
+interface SearchPageProps {
+  searchParams?: {
+    q?: string;
+    page?: string;
+  };
+}
+
+export default function SearchPage({ searchParams }: SearchPageProps) {
   const query = searchParams?.q;
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
 
