@@ -17,7 +17,7 @@ export const defaultInitState: BagState = {
   bag: [],
 };
 
-export const createBagStore = (initState: BagState = defaultInitState) => {
+export function createBagStore(initState: BagState = defaultInitState) {
   return createStore<BagStore>()((set) => ({
     ...initState,
     addToBag: (item: BagItem) =>
@@ -31,4 +31,4 @@ export const createBagStore = (initState: BagState = defaultInitState) => {
         ),
       })),
   }));
-};
+}
