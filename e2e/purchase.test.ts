@@ -1,11 +1,28 @@
 import { test, expect } from '@playwright/test';
 import prisma from '@/lib/prisma';
 
-test('authenticated user can purchase the item', async ({ page }) => {
-  const inventory = await prisma.inventory.findUnique({
-    where: { id: 1 },
-  });
+let initialInventoryQuantity: number | undefined;
 
+test.beforeAll(async () => {
+  const inventory = await prisma.inventory.findUnique({ where: { id: 1 } });
+  initialInventoryQuantity = inventory?.quantity;
+});
+
+test.afterAll(async () => {
+  const inventory = await prisma.inventory.findUnique({ where: { id: 1 } });
+  const inventoryQuantity = inventory?.quantity;
+
+  if (
+    initialInventoryQuantity !== undefined &&
+    inventoryQuantity !== undefined
+  ) {
+    expect(inventoryQuantity).toBe(initialInventoryQuantity - 1);
+  } else {
+    throw new Error('Inventory quantity is undefined');
+  }
+});
+
+test('authenticated user can purchase the item', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('img', { name: 'Sign in' }).click();
   await page.getByLabel('Password').click();
@@ -30,14 +47,4 @@ test('authenticated user can purchase the item', async ({ page }) => {
   await expect(
     page.getByRole('heading', { name: 'Payment Successful' })
   ).toBeVisible();
-
-  const updatedInventory = await prisma.inventory.findUnique({
-    where: { id: 1 },
-  });
-
-  if (updatedInventory && inventory) {
-    expect(updatedInventory.quantity).toBe(inventory.quantity - 1);
-  } else {
-    throw new Error('Item not found');
-  }
 });

@@ -33,6 +33,7 @@ async function main() {
     // Seed test user for development environment
     const testUser = await prisma.user.create({
       data: {
+        id: 'test-user-id',
         email: 'bob@alice.com',
         name: 'Bob Alice',
         image: 'https://avatars.githubusercontent.com/u/67470890?s=200&v=4',
