@@ -14,7 +14,8 @@ how they will look before buying the clothing item.
 0. [Demo](#demo)
 1. [Installation](#installation)
 2. [Gettng Started](#getting-started)
-3. [Disclaimer](#disclaimer)
+3. [Testing](#testing)
+4. [Disclaimer](#disclaimer)
 
 ## Demo
 
@@ -107,6 +108,19 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Testing
+
+To test the application you need to create local test Postgres database. You can then add database url to the `.env`:
+
+```env
+TEST_DATABASE_URL=<your_database_url>
+```
+
+After that update `schema.prisma` same as we done for local database.
+
+- For unit test using jest run command: `npm run test`
+- For e2e test using playwright run command: `npm run e2e:test`
 
 ## Disclaimer
 

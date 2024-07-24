@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import AddToBag from '@/components/clothing-details/add-to-bag';
 import { Color, Size } from '@prisma/client';
-import { mockClothingItem } from '@/__mocks__/mockData';
+import { clothingItem } from '@/tests/utils/clothingData';
 import { BagStoreProvider } from '@/providers/bag-store-provider';
 
 describe('AddToBag', () => {
-  const item = mockClothingItem;
+  const item = clothingItem;
   const priceInCents = 1000;
   const quantity = 2;
   const color = 'BLUE' as Color;

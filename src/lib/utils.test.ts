@@ -7,7 +7,7 @@ import {
   getUniqueSizes,
   findSmallestPriceInCents,
 } from './utils';
-import { mockClothingItem } from '@/__mocks__/mockData';
+import { clothingItem } from '@/tests/utils/clothingData';
 
 describe('getGenderForSection', () => {
   test('returns the correct gender for a given section', () => {
@@ -74,12 +74,12 @@ describe('getColorsAndSizesArrayFromParams', () => {
 
 describe('getUniqueSizes', () => {
   test('returns an array of unique sizes for a given clothing item', () => {
-    expect(getUniqueSizes(mockClothingItem)).toEqual(['S', 'M', 'L', 'XL']);
+    expect(getUniqueSizes(clothingItem)).toEqual(['S', 'M', 'L', 'XL']);
   });
 });
 
 describe('findSmallestPriceInCents', () => {
   test('returns the smallest price in cents for a given clothing item', () => {
-    expect(findSmallestPriceInCents(mockClothingItem)).toBe(1);
+    expect(findSmallestPriceInCents(clothingItem)).toBe(1);
   });
 });

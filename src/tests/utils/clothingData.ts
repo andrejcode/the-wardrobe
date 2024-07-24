@@ -1,7 +1,7 @@
-import { ClothingVariation, Color, Gender, Size } from '@prisma/client';
-import { ClothingItemWithVariationsAndInventory } from '../lib/definitions';
+import { Color, Gender, Size } from '@prisma/client';
+import { ClothingItemWithVariationsAndInventory } from '@/lib/definitions';
 
-export const mockClothingItem: ClothingItemWithVariationsAndInventory = {
+export const clothingItem: ClothingItemWithVariationsAndInventory = {
   id: 1,
   name: 'MANGO Faux Leather Jacket',
   gender: Gender.FEMALE,
@@ -88,30 +88,3 @@ export const mockClothingItem: ClothingItemWithVariationsAndInventory = {
     },
   ],
 };
-
-export const mockVariations: ClothingVariation[] = [
-  {
-    id: 1,
-    color: Color.RED,
-    imageUrl: 'red.jpg',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    clothingItemId: 1,
-  },
-  {
-    id: 2,
-    color: Color.BLUE,
-    imageUrl: 'blue.jpg',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    clothingItemId: 1,
-  },
-  {
-    id: 3,
-    color: Color.GREEN,
-    imageUrl: 'green.jpg',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    clothingItemId: 1,
-  },
-];

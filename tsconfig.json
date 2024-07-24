@@ -17,7 +17,7 @@
         "name": "next"
       }
     ],
-    "types": ["@testing-library/jest-dom"],
+    "types": ["@testing-library/jest-dom", "node"],
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -29,10 +29,5 @@
     ".next/types/**/*.ts",
     "jest.config.ts"
   ],
-  "exclude": ["node_modules"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+  "exclude": ["node_modules"]
 }

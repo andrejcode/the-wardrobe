@@ -29,6 +29,20 @@ async function main() {
     console.log(`Created clothing with id: ${createdClothing.id}`);
   }
 
+  if (process.env.NODE_ENV === 'development') {
+    // Seed test user for development environment
+    const testUser = await prisma.user.create({
+      data: {
+        email: 'bob@alice.com',
+        name: 'Bob Alice',
+        image: 'https://avatars.githubusercontent.com/u/67470890?s=200&v=4',
+        role: 'admin',
+      },
+    });
+
+    console.log(`Created user with id: ${testUser.id}`);
+  }
+
   console.log('Seeding finished.');
 }
 
@@ -39,4 +53,5 @@ main()
   .catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();
+    process.exit(1);
   });

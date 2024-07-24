@@ -1,10 +1,15 @@
-import Link from 'next/link';
+'use client';
+
 import { IoLogInOutline } from 'react-icons/io5';
+import { signIn } from 'next-auth/react';
 
 export default function SignInIcon() {
   return (
-    <Link href="/signin">
-      <IoLogInOutline className="cursor-pointer" size={24} title="Sign in" />
-    </Link>
+    <IoLogInOutline
+      className="cursor-pointer"
+      size={24}
+      title="Sign in"
+      onClick={() => signIn()}
+    />
   );
 }
