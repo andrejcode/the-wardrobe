@@ -18,7 +18,7 @@ export async function addOrRemoveFromWishlist(
   isInWishlist: boolean
 ) {
   if (userId === null) {
-    redirect('/signin');
+    redirect('/api/auth/signin');
   }
 
   try {

@@ -16,7 +16,7 @@ export default async function Wishlist({ searchParams }: WishlistProps) {
   const session = await auth();
 
   if (!session || !session.user) {
-    redirect('/signin');
+    redirect('/api/auth/signin');
   }
 
   const user = await fetchUserByEmail(session.user.email!);
