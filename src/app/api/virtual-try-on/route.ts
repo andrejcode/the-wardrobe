@@ -12,14 +12,7 @@ export async function GET(req: NextRequest) {
           'https://img01.ztat.net/article/spp-media-p1/4d9ca4a6d4be436c83a0c2adfb0ff39f/97f4f43c0f9848f8bd00886db100f224.jpg?imwidth=1800&filter=packshot',
         description: 'Short Sleeve Round Neck T-shirts',
       },
-      logs: true,
-      onQueueUpdate: (update) => {
-        if (update.status === 'IN_PROGRESS') {
-          if (update.logs !== null) {
-            update.logs.map((log) => log.message).forEach(console.log);
-          }
-        }
-      },
+      logs: false,
     });
 
     return NextResponse.json({ imageUrl: result.image.url }, { status: 200 });
