@@ -15,6 +15,10 @@ export async function GET(req: NextRequest) {
       logs: false,
     });
 
+    if (!result.image) {
+      throw new Error('Could not generate image.');
+    }
+
     return NextResponse.json({ imageUrl: result.image.url }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
