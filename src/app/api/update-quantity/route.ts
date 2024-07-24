@@ -8,6 +8,13 @@ export async function POST(req: NextRequest) {
   try {
     const { sessionId } = await req.json();
 
+    if (!sessionId) {
+      return NextResponse.json(
+        { error: 'Session ID is required' },
+        { status: 400 }
+      );
+    }
+
     const sessionFound = await prisma.stripeSession.findUnique({
       where: {
         sessionId,
@@ -25,13 +32,6 @@ export async function POST(req: NextRequest) {
           sessionId,
         },
       });
-    }
-
-    if (!sessionId) {
-      return NextResponse.json(
-        { error: 'Session ID is required' },
-        { status: 400 }
-      );
     }
 
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
