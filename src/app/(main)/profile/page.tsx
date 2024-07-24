@@ -11,10 +11,8 @@ export default async function ProfilePage() {
   const session = await auth();
 
   if (!session || !session.user) {
-    redirect('/signin');
+    redirect('/api/auth/signin');
   }
-
-  console.log(process.env.NEXT_PUBLIC_API_URL);
 
   const email = session.user.email ?? '';
 
@@ -72,9 +70,6 @@ export default async function ProfilePage() {
           <table className="min-w-full bg-white">
             <thead>
               <tr className="text-left">
-                <th className="border-b border-gray-200 px-4 py-2">
-                  Payment ID
-                </th>
                 <th className="border-b border-gray-200 px-4 py-2">Date</th>
                 <th className="border-b border-gray-200 px-4 py-2">Amount</th>
                 <th className="border-b border-gray-200 px-4 py-2">Status</th>
@@ -87,9 +82,6 @@ export default async function ProfilePage() {
                   key={payment.paymentIntent.id}
                   className={index % 2 === 0 ? 'bg-gray-100' : ''}
                 >
-                  <td className="border-b border-gray-200 px-4 py-2">
-                    {payment.paymentIntent.id}
-                  </td>
                   <td className="border-b border-gray-200 px-4 py-2">
                     {new Date(
                       payment.paymentIntent.created * 1000
