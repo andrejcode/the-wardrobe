@@ -11,15 +11,11 @@ how they will look before buying the clothing item.
 
 ## Table of Contents
 
-0. [Demo](#demo)
 1. [Installation](#installation)
 2. [Gettng Started](#getting-started)
 3. [Testing](#testing)
-4. [Disclaimer](#disclaimer)
-
-## Demo
-
-You can preview the app [here](https://the-wardrobe.vercel.app/).
+4. [Screenshots](#screenshots)
+5. [Disclaimer](#disclaimer)
 
 ## Installation
 
@@ -37,23 +33,6 @@ Follow these steps to set up and run the project locally:
 
      ```env
      DATABASE_URL=<your_database_url>
-     ```
-
-   - In the `prisma/schema.prisma` file uncomment the url like so:
-
-     ```prisma
-     datasource db {
-      provider  = "postgresql"
-      // Production
-      // url       = env("POSTGRES_PRISMA_URL")
-      // directUrl = env("POSTGRES_URL_NON_POOLING")
-
-      // For local environment
-      url = env("DATABASE_URL")
-
-      // For test environment
-      // url = env("TEST_DATABASE_URL")
-     }
      ```
 
 - To run migrations and seed the database `npx prisma migrate dev`
@@ -117,10 +96,16 @@ To test the application you need to create local test Postgres database. You can
 TEST_DATABASE_URL=<your_database_url>
 ```
 
-After that update `schema.prisma` same as we done for local database.
+After that update `schema.prisma` to use test database.
 
 - For unit test using jest run command: `npm run test`
 - For e2e test using playwright run command: `npm run e2e:test`
+
+## Screenshots
+
+| ![Screenshot 1](screenshots/screenshot1.png) | ![Screenshot 2](screenshots/screenshot2.png) |
+| -------------------------------------------- | -------------------------------------------- |
+| ![Screenshot 3](screenshots/screenshot3.png) | ![Screenshot 4](screenshots/screenshot4.png) |
 
 ## Disclaimer
 

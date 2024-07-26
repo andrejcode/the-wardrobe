@@ -3,12 +3,15 @@ import prisma from '@/lib/prisma';
 
 let initialInventoryQuantity: number | undefined;
 
-test.beforeAll(async () => {
+test.beforeEach(async ({ page }) => {
   const inventory = await prisma.inventory.findUnique({ where: { id: 1 } });
   initialInventoryQuantity = inventory?.quantity;
+
+  await page.goto('/api/auth/signout');
+  await page.getByRole('button', { name: 'Sign out' }).click();
 });
 
-test.afterAll(async () => {
+test.afterEach(async () => {
   const inventory = await prisma.inventory.findUnique({ where: { id: 1 } });
   const inventoryQuantity = inventory?.quantity;
 

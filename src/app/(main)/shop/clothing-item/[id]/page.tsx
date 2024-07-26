@@ -3,6 +3,11 @@ import { Color, Size } from '@prisma/client';
 import { playfairDisplay } from '@/app/fonts';
 import { Suspense } from 'react';
 import SimilarItems from '@/components/clothing-details/similar-items';
+import * as fal from '@fal-ai/serverless-client';
+
+fal.config({
+  proxyUrl: '/api/fal/proxy',
+});
 
 interface ClothingItemPageProps {
   params: {

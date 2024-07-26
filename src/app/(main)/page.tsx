@@ -1,10 +1,5 @@
 import { Hero, CategoriesSection } from '@/components/home/';
 import { Suspense } from 'react';
-import * as fal from '@fal-ai/serverless-client';
-
-fal.config({
-  proxyUrl: '/api/fal/proxy',
-});
 
 export default function HomePage() {
   return (
