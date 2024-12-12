@@ -21,8 +21,10 @@ export default function ClothingItem({ clothingItem }: ClothingItemProps) {
   const [imageUrl, setImageUrl] = useState<string | StaticImageData>(
     clothingItem.clothingVariations[0].imageUrl
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     setImageUrl(
       clothingItem.clothingVariations.find(
         (variation) => variation.color === activeColor
@@ -38,6 +40,11 @@ export default function ClothingItem({ clothingItem }: ClothingItemProps) {
     <Link href={`/shop/clothing-item/${clothingItem.id}`}>
       <div className="mb-4 flex h-[500px] w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-lg md:m-4 md:max-w-80">
         <div className="relative h-80 w-80 self-center">
+          {isLoading && (
+            <div className="absolute inset-0 flex justify-center items-center bg-gray-100 bg-opacity-50 z-50">
+              <p>Loading...</p>
+            </div>
+          )}
           <Image
             src={imageUrl}
             alt={clothingItem.name}
@@ -46,6 +53,7 @@ export default function ClothingItem({ clothingItem }: ClothingItemProps) {
             sizes="100%"
             quality={50}
             className="object-contain"
+            onLoad={() => setIsLoading(false)}
           />
         </div>
 
