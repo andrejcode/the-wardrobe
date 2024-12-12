@@ -2,12 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { playfairDisplay } from '@/app/fonts';
 import Button from '../button';
+import heroImage from '@/assets/hero-image.jpg';
 
 export default function Hero() {
   return (
     <section className="relative h-[70vh]">
       <Image
-        src="/hero-image.jpg"
+        src={heroImage}
         alt="Clothing hanging on a rack"
         fill={true}
         className="object-cover"

@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import Sizes from './sizes';
 import ColorCircles from './color-circles';
 import SmallestPrice from './smallest-price';
 import { ClothingItemWithVariationsAndInventory } from '@/lib/definitions';
 import { Color } from '@prisma/client';
+import placeholderImage from '@/assets/placeholder-image.jpg';
 
 interface ClothingItemProps {
   clothingItem: ClothingItemWithVariationsAndInventory;
@@ -17,7 +18,7 @@ export default function ClothingItem({ clothingItem }: ClothingItemProps) {
   const [activeColor, setActiveColor] = useState<Color>(
     clothingItem.clothingVariations[0].color
   );
-  const [imageUrl, setImageUrl] = useState<string>(
+  const [imageUrl, setImageUrl] = useState<string | StaticImageData>(
     clothingItem.clothingVariations[0].imageUrl
   );
 
@@ -25,7 +26,7 @@ export default function ClothingItem({ clothingItem }: ClothingItemProps) {
     setImageUrl(
       clothingItem.clothingVariations.find(
         (variation) => variation.color === activeColor
-      )?.imageUrl ?? '/clothing/placeholder-image.jpg'
+      )?.imageUrl ?? placeholderImage
     );
   }, [activeColor, clothingItem.clothingVariations]);
 

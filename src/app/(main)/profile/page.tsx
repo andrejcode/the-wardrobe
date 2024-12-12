@@ -6,6 +6,7 @@ import Stripe from 'stripe';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import placeholderImage from '@/assets/placeholder-image.jpg';
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -50,7 +51,7 @@ export default async function ProfilePage() {
     <>
       <div className="mx-4 flex items-center">
         <Image
-          src="/clothing/placeholder-image.jpg"
+          src={placeholderImage}
           alt={session.user.name ?? 'User'}
           priority
           width={100}
