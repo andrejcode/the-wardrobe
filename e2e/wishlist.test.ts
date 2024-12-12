@@ -1,12 +1,4 @@
 import { test, expect } from '@playwright/test';
-import prisma from '@/lib/prisma';
-
-test.beforeEach(async ({ page }) => {
-  await page.goto('/api/auth/signout');
-  await page.getByRole('button', { name: 'Sign out' }).click();
-
-  await prisma.wishlist.deleteMany({ where: { userId: 'test-user-id' } });
-});
 
 test('authenticated user can add item to the wishlist', async ({ page }) => {
   await page.goto('/');

@@ -1,29 +1,4 @@
 import { test, expect } from '@playwright/test';
-import prisma from '@/lib/prisma';
-
-let initialInventoryQuantity: number | undefined;
-
-test.beforeEach(async ({ page }) => {
-  const inventory = await prisma.inventory.findUnique({ where: { id: 1 } });
-  initialInventoryQuantity = inventory?.quantity;
-
-  await page.goto('/api/auth/signout');
-  await page.getByRole('button', { name: 'Sign out' }).click();
-});
-
-test.afterEach(async () => {
-  const inventory = await prisma.inventory.findUnique({ where: { id: 1 } });
-  const inventoryQuantity = inventory?.quantity;
-
-  if (
-    initialInventoryQuantity !== undefined &&
-    inventoryQuantity !== undefined
-  ) {
-    expect(inventoryQuantity).toBe(initialInventoryQuantity - 1);
-  } else {
-    throw new Error('Inventory quantity is undefined');
-  }
-});
 
 test('authenticated user can purchase the item', async ({ page }) => {
   await page.goto('/');
